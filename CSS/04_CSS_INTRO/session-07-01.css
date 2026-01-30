@@ -1,0 +1,37 @@
+/* ユニバーサルセレクタ: 全ての要素に適用 */
+/** {
+  background-color: gold;
+} */
+
+body {
+  background-color: #d6f0e6;
+}
+
+
+/* 要素セレクタ: 指定した要素に適用 */
+button {
+  font-size: 30px;
+  background-color: palegoldenrod;
+}
+
+/* セレクタリスト: 複数のセレクタに適用 */
+h1, h2 {
+  color: purple;
+}
+
+span {
+  color: green;
+}
+
+/* IDセレクタ: 指定したIDに適用 */
+#signup {
+  background-color: #003049;
+  color: #f77f00;
+}
+
+/* クラスセレクタ: 指定したクラスに適用 */
+.tag {
+  background-color: #f77f00;
+  color: #003049;
+  font-weight: bold;
+}
