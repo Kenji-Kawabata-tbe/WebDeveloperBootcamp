@@ -7,7 +7,6 @@ body {
   background-color: #d6f0e6;
 }
 
-
 /* 要素セレクタ: 指定した要素に適用 */
 button {
   font-size: 30px;
@@ -15,7 +14,8 @@ button {
 }
 
 /* セレクタリスト: 複数のセレクタに適用 */
-h1, h2 {
+h1,
+h2 {
   color: purple;
 }
 
@@ -35,3 +35,79 @@ span {
   color: #003049;
   font-weight: bold;
 }
+
+/* 子孫セレクタ: 指定した要素の子孫要素に適用 */
+footer a {
+  color: red;
+}
+
+.post a {
+  color: red;
+}
+
+/* 隣接セレクタ: 指定した要素の直後の要素に適用 */
+/*input + button {
+  background-color: pink;
+}*/
+
+h2 + button {
+  font-size: 20px;
+}
+
+/* 直下セレクタ: 指定した要素の直下の要素に適用 */
+footer > a {
+  color: peru;
+}
+
+/* 属性セレクタ: 指定した属性に適用 */
+input[type="password"] {
+  color: green;
+}
+a[href*="google"] {
+  color: magenta;
+}
+
+/* 擬似クラス: 指定した要素の状態に適用 */
+/*button:hover {
+  background-color: pink;
+  color: white;
+}*/
+
+.post button:hover {
+  background-color: pink;
+  color: white;
+}
+
+.post a:hover {
+  text-decoration: underline;
+}
+
+.post button:active {
+  background-color: aqua;
+}
+
+.post:nth-of-type(2) {
+  background-color: #f77f00;
+  border: 2px solid #003049;
+}
+
+.post:nth-of-type(2n) {
+  background-color: #f77f00;
+  border: 2px solid #003049;
+}
+
+/* 擬似要素: 指定した要素の特定の部分に適用 */
+h2::first-letter {
+  font-size: 50px;
+}
+
+p::first-line {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+/*こうするとページ全体に適用される
+::selection {
+  background-color: black;
+  color: white;
+}*/
