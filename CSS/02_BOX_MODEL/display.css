@@ -1,0 +1,31 @@
+h1 {
+  /* display: inline: インライン要素にする */
+  display: inline;
+  /* display: none: 要素を非表示にする */
+  /*display: none;*/
+  background-color: palegoldenrod;
+  border: 1px solid black;
+}
+
+span {
+  /* display: block: ブロック要素にする */
+  display: block;
+  background-color: lightblue;
+  border: 1px solid black;
+  /* span要素でもブロック要素にした場合はwidth, padding, margin,heightが効く */
+  width: 100px;
+  height: 100px;
+  padding: 50px;
+  margin: 50px;
+}
+
+div {
+ /* display: inline-block: インライン要素にしつつ、width, padding, margin,heightが効く */
+ display: inline-block;
+ height: 100px;
+ width: 100px;
+ margin: 50px;
+ padding: 50px;
+ background-color: brown;
+ border: 1px solid black;
+}

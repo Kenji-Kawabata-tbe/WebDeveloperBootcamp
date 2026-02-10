@@ -4,8 +4,54 @@ div {
   background-color: palegoldenrod;
 }
 
-h1 {
-  background-color: pink;
+body {
+  margin: 0;
 }
 
+h1 {
+  background-color: pink;
+  width: 500px;
+  padding-left: 100px;
+  padding-top: 50px;
+  margin-bottom: 0;
+  margin: 0;
+}
 
+#one {
+  background-color: lightblue;
+  border-width: 5px;
+  border-color: black;
+  border-style: solid;
+  /* border-box: 枠線を含めたサイズを指定する */
+  /*box-sizing: border-box;*/
+  margin-left: 20px;
+  margin-bottom: 100px;
+}
+
+#two {
+  background-color: lightcoral;
+  border-color: black;
+  border-width: 5px;
+  border-style: dashed;
+  border-left-width: 10px;
+  padding-right: 200px;
+  margin: 100px;
+}
+
+#three {
+  background-color: lightgreen;
+  border: 5px solid 236, 111, 177;
+  border-radius: 10px;
+} 
+
+button {
+  padding: 20px;
+  padding: 10px 20px;
+  padding: 10px 20px 30px;
+  padding: 10px 20px 30px 40px;
+}
+
+span {
+ margin-left: 30px;
+ margin-top: 10px;
+}
