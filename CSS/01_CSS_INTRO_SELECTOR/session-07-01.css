@@ -111,3 +111,27 @@ p::first-line {
   background-color: black;
   color: white;
 }*/
+
+
+/*tips
+
+- CSSの優先順位(詳細度)
+    - 上から順番に高い。
+        - inline(HTMLの中でstyle属性を使って書いたもの)
+        - id
+        - class
+        - type(要素)
+   - 同じ優先度の場合は後ろに書いた方が優先される
+/*
+
+- 継承
+  - 親要素のスタイルが子要素に継承される
+  - 以下の場合、p要素のcolorはredになり他のp要素のcolorはblueになる
+    body {
+      color: red;
+    }
+    p {
+      color: blue;
+    }
+  - 一番近い親のCSSが継承される
+  - 要素によっては継承が行われない要素もある
