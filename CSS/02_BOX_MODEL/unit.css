@@ -1,0 +1,66 @@
+html {
+    font-size: 30px;
+}
+
+#percentages {
+    background-color: palegoldenrod;
+    width: 800px;
+    height: 800px;
+}
+
+#percentages div {
+    background-color: lightblue;
+    /* 親要素の50% */
+    width: 50%;
+    height: 50%;
+}
+
+#ems h1 {
+    font-size: 40px;
+    border: 1px solid black;
+    /* その要素のフォントサイズの200% */
+    line-height: 200%;
+}
+
+#ems {
+    font-size: 20px;
+}
+
+#ems h2 {
+    /* em(エム)：親要素のフォントサイズをきを基準とした相対値 */
+    font-size: 2em;
+    /* widthなど他のプロパティの場合、1emは対象要素自身のフォントサイズの1倍
+       対象要素自身のフォントサイズが設定されていない場合は親要素のフォントサイズとの比率になる */
+    margin-left: 1em;
+}
+
+#ems p {
+    font-size: 0.5em;
+}
+
+button {
+    /* この場合、親要素のfont-sizeとの比率になる */
+    font-size: 1em;
+    padding: 0 1em;
+    border-radius: 0.5em;
+    background-color: aliceblue;
+    color: black;
+}
+
+ul {
+    /* emの　フォントサイズは親要素のフォントサイズとの比率なのでネストが深くなるとその分の比率が掛け合わされて大きくなったり小さくなったりする */
+    /*font-size: 1.5em;*/
+}
+
+/* rem(レム)：ルート要素のフォントサイズを基準とした相対値 */
+#rems h2 {
+    font-size: 2rem;
+}
+
+#rems ul {
+    font-size: 0.8rem;
+}
+
+#rems button {
+    font-size: 1.5rem;
+}
