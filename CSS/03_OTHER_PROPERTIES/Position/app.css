@@ -1,0 +1,51 @@
+div {
+    width: 100px;
+    height: 100px;
+    background-color: purple;
+    border: 2px solid black;
+    margin: 10px;
+    display: inline-block;
+}
+
+.middle {
+    background-color: lightblue;
+}
+
+#static .middle { 
+    /* static: 通常の配置 */
+    position: static;
+    top: 100px; /* staticではこのプロパティは無効 */
+}
+
+#relative .middle { 
+    position: relative;
+    /* 空間を確保してずらす */
+    top: 100px;
+    left: 50px;
+}
+
+/*
+#absolute {
+    position: relative;
+}
+*/
+
+#absolute .middle { 
+    /* absolute: 要素の空間が作製されない 
+    　absoluteだけを設定した場合、真ん中の四角の空間が作製されず、右側の四角が真ん中に詰められて配置される
+    　かつ、真ん中の四角はその上にくるので右側の四角が表示されない*/
+    position: absolute;
+    /* 親要素を基準に配置 この場合、親要素はbodyになるのでstaticと被って表示される
+       上のabsoluteのコメントアウトを解除すると親要素はabsoluteになる*/
+    top: 100px;
+    left: 50px;
+}
+
+#fixed .middle { 
+    /* fixed: 要素の空間が作製されない～はabsoluteと同じ。
+      そのうえで、要素をViewport(今見えている画面)を基準に固定 */
+    position: fixed;
+
+}
+
+/* sticky: relativeのように見えるけどabsoluteとfixedの両方の特徴を持つ */

@@ -1,0 +1,22 @@
+section {
+    width: 500px;
+    height: 500px;
+    background-color: magenta;
+}
+
+#rgba {
+    width: 50%;
+    height: 50%;
+    /* rgba(赤, 緑, 青, 不透明度) */
+    background-color: rgba(255, 255, 255, 0.7); /* 30%透明 */
+    background-color: #8feb64ff; /* 16進数で指定も可能 */
+}
+
+#opaicty {
+    width: 50%;
+    height: 50%;
+    background-color: yellow;
+    /* opacity : 0.0 ~ 1.0 で指定 0.0:完全透明 1.0:完全不透明 */
+    /* rgbaと違い要素自体と子要素にも影響を与える */
+    opacity: 0.3;
+}
