@@ -1,0 +1,68 @@
+h1 {
+     background-color: aqua;
+     border: 5px solid black;
+     color: white;
+     padding: 0.7em;
+     width: 300px;
+     font-size: 1.8em;
+     text-align: center;
+     margin: 20px auto; /* auto: 左右に均等に配置 */
+     font-family: 'Courier New';
+     font-weight: lighter;
+}
+
+h1:nth-of-type(2n) {
+    background-color: #e9c46a;
+}
+
+h1:nth-of-type(3n) {
+    background-color: #f4a261;
+}
+
+h1:nth-of-type(4n) {
+    background-color: #e76f51;
+}
+
+section:first-of-type h1:nth-of-type(1) {
+    transform-origin: bottom right; /* 回転の基準点 */
+    transform: rotate(45deg); /* 45度回転 */
+}
+
+section:first-of-type h1:nth-of-type(2) {
+    transform: scale(0.5); /* 0.5倍に縮小 */
+    /*transform: scale(2.1); 横方向2.1倍、縦方向1倍に拡大 */
+}
+
+section:first-of-type h1:nth-of-type(3) {
+    transform: translateX(200px); /* 横方向200px移動 */
+}
+
+section:first-of-type h1:nth-of-type(4) {
+    transform: translateY(100px); /* 縦方向100px移動 */
+    transform: translate(200px, 100px); /* 横方向200px、縦方向100px移動 */
+    transform: translate(-100px, -100px); /* 横方向-100px、縦方向-100px移動 */
+    transform: translate(50%, 50%); /* 横方向50%、縦方向50%移動 */
+    transform: translate(-50%, -50%); /* 横方向-50%、縦方向-50%移動 */
+}
+
+section:nth-of-type(2) h1:nth-of-type(1) {
+    transform: skew(20deg); /* 横方向20度傾ける */
+}
+
+section:nth-of-type(2) h1:nth-of-type(2) {
+    transform: skew(10deg, 25deg); /* 横方向10度、縦方向25度傾ける */
+}
+
+section:nth-of-type(2) h1:nth-of-type(3) {
+    transform: rotate(45deg) scale(0.5); /* 45度回転、0.5倍に縮小 */
+}
+
+section:nth-of-type(2) h1:nth-of-type(4) {
+    transform: translateX(200px) rotate(0.5turn) scale(2); /* 横方向200px移動、0.5turn回転、2倍に拡大 */
+}
+
+/*section:nth-of-type(2) {
+    transform: perspective(100px) rotateX(45deg); 100pxの奥行きで45度回転 */
+    
+/* 
+

@@ -1,0 +1,43 @@
+.circle {
+    width: 300px;
+    height: 300px;
+    background-color: magenta;
+    /* transition: 変化にかかる時間; */
+    transition: 1s;
+    transition: background-color 3s 1s, border-radius 2s;
+}
+
+.circle:hover {
+    background-color: cyan;
+    border-radius: 50%;
+}
+
+
+section div {
+    height: 100px;
+    width: 100px;
+    background-color: turquoise;
+    margin: 20px 0;
+    transition: margin-left 3s;
+}
+
+section:hover div {
+    margin-left: 500px;
+}
+
+div:nth-of-type(1) {
+    /* timing-function: 変化の速度 */
+    transition-timing-function: ease-in; /* 始めはゆっくり、終わりは速く */
+}
+
+div:nth-of-type(2) {
+    transition-timing-function: ease-out; /* 始めは速く、終わりはゆっくり */
+}
+
+div:nth-of-type(3) {
+    transition-timing-function: cubic-bezier(0.7, 0, 0.84, 0); /* 3次ベジェ曲線 より細かく指定できる*/
+}
+
+div:nth-of-type(4) {
+    transition-timing-function: cubic-bezier(0.85, 0, 0.15, 1);
+}
