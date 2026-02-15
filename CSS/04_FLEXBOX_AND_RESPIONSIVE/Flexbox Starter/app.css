@@ -1,0 +1,24 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+h1 {
+    text-align: center;
+}
+#container {
+    background-color: #003049;
+    width: 90%;
+    height: 500px;
+    margin: 0 auto;
+    border: 5px solid #003049;
+    /* display: flex: 要素をflexboxにする。デフォルトはrow方向(横方向) */
+    /* divが200pxだが、containerのheightが500pxなので、その範囲内の大きさで配置される */
+    display: flex;
+    /* flex-direction: flexモデルの主軸をどの方向にするか */
+    flex-direction: column-reverse;
+}
+
+#container div {
+    width: 200px;
+    height: 200px;
+
+}
