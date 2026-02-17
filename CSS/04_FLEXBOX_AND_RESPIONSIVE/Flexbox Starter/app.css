@@ -15,17 +15,35 @@ h1 {
     display: flex;
     /* flex-direction: flexモデルの主軸をどの方向にするか */
     /* row: 横方向(デフォルト), column: 縦方向, row-reverse: 横方向(逆方向), column-reverse: 縦方向(逆方向) */
-    flex-direction: column;
+    flex-direction: row;
     /* justify-content: 主軸方向の配置 */
     /* flex-start: 左寄せ(デフォルト), flex-end: 右寄せ, center: 中央寄せ, space-between: 均等配置, space-around: 均等配置(余白を含む) */
     justify-content: center; 
     /* flex-wrap: 主軸方向の折り返し */
     /* nowrap: 折り返さない(デフォルト), wrap: 折り返す, wrap-reverse: 折り返した後で逆方向に折り返す */
     flex-wrap: wrap;
+    
+    /* align-items: 交差軸方向の配置 */
+    /* flex-start: 上寄せ(デフォルト), flex-end: 下寄せ, center: 中央寄せ, space-between: 均等配置, space-around: 均等配置(余白を含む) */
+    align-items: flex-start;
+    /*flex-wrap: wrap-reverse; */
+    
+    /* align-content: 列と列の間、行と行の間のスペースの配置 */
+    /* flex-wrap: wrap/wrap-reverseの場合のみ有効 */
+    /* space-between: 均等配置, space-around: 均等配置(余白を含む), flex-start: 上寄せ, flex-end: 下寄せ, center: 中央寄せ */
+    /*align-content: space-between;*/
+
 }
 
 #container div {
     width: 200px;
     height: 200px;
+    text-align: center;
 
+}
+
+div:nth-of-type(3) {
+    /* align-self: 要素自身の配置 */
+    /* flex-start: 上寄せ, flex-end: 下寄せ, center: 中央寄せ, baseline: ベースライン寄せ, stretch: 伸張 */
+    align-self: center;
 }
