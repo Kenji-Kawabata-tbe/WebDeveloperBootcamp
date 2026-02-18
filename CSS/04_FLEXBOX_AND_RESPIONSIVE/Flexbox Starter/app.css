@@ -7,7 +7,7 @@ h1 {
 #container {
     background-color: #003049;
     width: 90%;
-    height: 500px;
+    /* height: 500px; */
     margin: 0 auto;
     border: 5px solid #003049;
     /* display: flex: 要素をflexboxにする。デフォルトはrow方向(横方向) */
@@ -21,11 +21,11 @@ h1 {
     justify-content: center; 
     /* flex-wrap: 主軸方向の折り返し */
     /* nowrap: 折り返さない(デフォルト), wrap: 折り返す, wrap-reverse: 折り返した後で逆方向に折り返す */
-    flex-wrap: wrap;
+    /*flex-wrap: wrap;
     
     /* align-items: 交差軸方向の配置 */
     /* flex-start: 上寄せ(デフォルト), flex-end: 下寄せ, center: 中央寄せ, space-between: 均等配置, space-around: 均等配置(余白を含む) */
-    align-items: flex-start;
+    /*align-items: flex-start;
     /*flex-wrap: wrap-reverse; */
     
     /* align-content: 列と列の間、行と行の間のスペースの配置 */
@@ -35,15 +35,66 @@ h1 {
 
 }
 
+
+
+
+
+
 #container div {
     width: 200px;
     height: 200px;
     text-align: center;
-
+    /* flex-basis: フレックスコンテナ内のフレックスアイテムの基本幅を指定
+    主軸を基準とした要素の幅の指定。主軸が縦か横かによってwidthやheightより優先される */
+    flex-basis: 500px;
 }
 
+/* 
 div:nth-of-type(3) {
     /* align-self: 要素自身の配置 */
     /* flex-start: 上寄せ, flex-end: 下寄せ, center: 中央寄せ, baseline: ベースライン寄せ, stretch: 伸張 */
-    align-self: center;
+    /*align-self: center;
+}
+*/
+
+div:nth-of-type(1) {
+    /* flex-grow: フレックスコンテナ内の残りの空間のうち、どれだけがそのアイテムに割り当てられるかを設定する
+    0: 増やさない(デフォルト), 1: 1倍に増やす, 2: 2倍に増やす, ... */
+    flex-grow: 1;
+    /* flex-shrink: フレックスアイテムがフレックスコンテナより大きいとき、flex-shrinkに従って縮小する
+    0: 縮小しない(デフォルト), 1: 1倍に縮小する, 2: 2倍に縮小する, ... */
+    flex-shrink: 2;
+
+}
+
+div:nth-of-type(2) {
+    flex: 2 1 0;
+}
+
+main {
+    width: 80%;
+    margin: 0 auto;
+    border: 5px solid black;
+    height: 500px;
+    display: flex;
+}
+
+
+/* flexの省略記法：flex-grow, flex-shrink, flex-basisを一括で指定する */
+/* flex: 1 2 500px;
+1: flex-grow: 1
+2: flex-shrink: 2
+500px: flex-basis: 500px */
+main section.sidebar {
+    background-color: purple;
+    /* flex: 1; */
+    /* flex: 1 300px; */
+    flex: 1 2 300px;
+    border: 1px solid white;
+}
+
+main section.maincontent {
+    background-color: cyan;
+    /* flex: 1; */
+    flex: 2 600px;
 }
