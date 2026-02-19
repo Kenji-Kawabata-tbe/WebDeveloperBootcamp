@@ -1,0 +1,52 @@
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+h1 {
+  font-size: 6em;
+  text-align: center;
+}
+nav {
+  font-size: 1.5em;
+}
+
+ul,
+li {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+/* @media: メディアクエリを使用して、画面の幅に応じてスタイルを変更する */
+/* @media (width: 800px) {  画面の幅が800pxの場合にスタイルを変更する */
+/* @media (min-width: 800px) { 画面の幅が800px以上の場合にスタイルを変更する */
+/* @media (max-width: 800px) { 画面の幅が800px以下の場合にスタイルを変更する */
+/* @media (min-width: 600px) and (max-width: 800px) { 画面の幅が600px以上800px以下の場合にスタイルを変更する */
+/* h1 {
+    color: purple;
+  }
+} */
+
+/* and使わないパターンもある */
+h1 {
+    color: red;
+}
+
+@media (min-width: 500px) {
+    h1 {
+        color: purple;
+    }
+}
+
+@media (min-width: 1000px) {
+    h1 {
+        color: orange;
+    }
+}
+
+/* 画面の向きがlandscape(横)の場合にスタイルを変更する */
+@media (orientation: landscape) {
+    h1 {
+        color: yellow;
+    }
+}
