@@ -40,15 +40,29 @@
 //  console.log('はぁ。。。');
 //}
 
+//const password = prompt('パスワードを入力してください');
+//
+//if (password.length >= 6) {
+//  if (password.indexOf(' ') === -1) {
+//    console.log('OK');
+//  } else {
+//    console.log('空白があります');
+//  }
+//} else {
+//  console.log('パスワードが短すぎます。6文字以上にしてください')
+//}
+
+//const userInput = prompt('なにか入力してください');
+//if (userInput) {
+//  console.log('TRUTHY');
+//} else {
+//  console.log('FALSY');
+//}
+
 const password = prompt('パスワードを入力してください');
 
-if (password.length >= 6) {
-  if (password.indexOf(' ') === -1) {
+if (password.length >= 6 && password.indexOf(' ') === -1) {
     console.log('OK');
   } else {
-    console.log('空白があります');
-  }
-} else {
-  console.log('パスワードが短すぎます。6文字以上にしてください')
+  console.log('パスワードのフォーマットが不正です');
 }
-
