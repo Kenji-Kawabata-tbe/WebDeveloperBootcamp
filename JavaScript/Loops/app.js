@@ -47,6 +47,7 @@ while (parseInt(guess) !== targetNum) {
 }
 if (guess === 'q') {
     console.log('ゲームを終了します。');
-} else {    
+} else {
     console.log(`正解! ${count}回で当たりました!`);
 }
+
