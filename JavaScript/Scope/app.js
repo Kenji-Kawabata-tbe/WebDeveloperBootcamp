@@ -58,3 +58,27 @@ function moge() {
     let xxx = 'かきくけこ';
     hoge();
 }
+
+
+//関数式 関数名は不要　変数名を使って呼び出す
+const add = function(x, y) {
+    return x + y;
+}
+add(9,4)
+
+const square = function(x) {
+    return x * x;
+}
+
+//高階関数
+//引数や戻り値で関数を扱う関数
+function callTwice(func) {
+    func();
+    func();
+}
+
+function rollDie() {
+    const roll = Math.floor(Math.random() * 6) + 1;
+    console.log(roll);
+}
+callTwice(rollDie)
