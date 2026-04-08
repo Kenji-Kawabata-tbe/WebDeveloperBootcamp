@@ -82,3 +82,52 @@ function rollDie() {
     console.log(roll);
 }
 callTwice(rollDie)
+
+function makeRandomFunc() {
+    const rand = Math.random();
+    if (rand > 0.5) {
+        return function() {
+            console.log('おめでとう!');
+        }
+    } else {
+        return function() {
+            alert('残念');
+        }
+    }
+}
+makeRandomFunc()
+
+function makeBetweenFunc(min, max) {
+    return function(num) {
+        return num >= min && num <= max;
+    }
+}
+const isChild = makeBetweenFunc(0, 18);
+isChild(49);
+
+// メソッド　オブジェクト内に定義された関数
+const myMath = {
+    PI: 3.14,
+    //square: function (num) {
+    //以下の省略系で記載される事が多い
+    square(num) {
+        return num * num;
+    },
+    //cube: function (num) {
+    //以下の省略系で記載される事が多い
+    cube(num) {
+        return num ** 3;
+    }
+}
+myMath.PI
+myMath.square(3);
+myMath.square(4);
+
+const kakezan = {
+    area(side) {
+        return side * side;
+    },
+    perimeter(side) {
+        return side * 4;
+    }
+}
