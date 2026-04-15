@@ -74,3 +74,45 @@ const newMovies1 = movies.map(movie => (
 const newMovies2 = movies.map(movie =>
     `${movie.title} - ${movie.score / 10}`
 )
+
+
+//Arrow関数のthis
+const person1 = {
+    firstName: 'Taro',
+    lastName: 'Yamada',
+    fullName: function() {
+        return `${this.lastName} ${this.firstName}`;
+    }
+}
+
+// Arrow関数とそうでない関数ではthisの決まり方が違う
+// Arrow関数内のthisは関数の外のスコープにあるthisを指すのでこの場合はundefindになる
+const person2 = {
+    firstName: 'Taro',
+    lastName: 'Yamada',
+    fullName: () => {
+        return `${this.lastName} ${this.firstName}`;
+    },
+    delayName: function() {
+        setTimeout(function () {
+            console.log(this.fullName());
+        }, 2000);
+    }
+}
+
+const person3 = {
+    firstName: 'Taro',
+    lastName: 'Yamada',
+    fullName: () => {
+        return `${this.lastName} ${this.firstName}`;
+    },
+    //　setTimeoutをArrow関数にするとその外のthisをみるようになって成功する
+    delayName: function() {
+        setTimeout(() => {
+            console.log(this);
+            console.log(this.fullName());
+        }, 2000);
+    }
+}
+
+

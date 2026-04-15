@@ -1,11 +1,16 @@
-const exams = [80, 98, 92, 78, 77 ,90, 89, 84, 81, 77]
-// every
-//全ての要素が75以上ならtrue、そうじゃなければfalse
-exams.every(exam => exam >= 75);
+//filter
+//提供されたテスト関数を満たす要素からなる新しい配列を生成する
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
 
-// some
-//どれか一つの要素が90以上ならtrue、そうじゃなければfalse
-exams.every(exam => exam >= 90);
+numbers.filter((num) => {
+    return num < 4;
+})
+
+
+
+const doubles = numbers.map(function(num) {
+    return num *2;
+})
 
 
 const movies = [
@@ -31,9 +36,17 @@ const movies = [
     }
 ]
 
-movies.some(movie => movie.year > 2015);
+const goodMovies1 = movies.filter(movie => {
+    return movie.score > 80;
+});
+const goodMovies2 = movies.filter(movie => movie.score > 80);
+const goodMovies3 = movies
+    .filter(movie => movie.score > 80)
+    .map(movie => movie.title);
 
+const Names= (['tanaka', 'suzuki1979', 'q29832128238983', 'hogemoge', 'kimetsu']);
 
-function allEvens(nums) {
-    return nums.every(num => num % 2 ===0);
+function validUserNames(usernames) {
+    return usernames.filter(name => name.length < 10);
 }
+
