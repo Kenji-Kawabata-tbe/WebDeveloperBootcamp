@@ -1,23 +1,3 @@
-////////////デフォルト引数 パラメーターの後ろに=でデフォルト値を設定する////////////
-function rollDie(numSides = 6) {
-    return Math.floor(Math.random() * numSides) + 1;
-}
-
-function greet(person, msg = 'こんにちは', suffix='!!') {
-    console.log(`${msg}、${person}さん${suffix}`);
-}
-//複数のパラメーターがあって途中をデフォルト値にしたい場合
-//こうするとmsgに。、personに山田が入る
-//greet('山田', '。')
-//デフォルト値を使いたいパラメーターの引数をundefinedを指定する
-greet('山田', undefined, '。')
-
-
-
-
-
-
-
 ////////////スプレッド構文////////////
 // ...がスプレッド構文
 // 配列だけでなく列挙可能なオブジェクト(順番に処理することができるオブジェクト)であれば利用可能
@@ -42,3 +22,12 @@ const allPets2 = [...cats, 'Sakura', ...dogs];
 const testMoji = ['あいうえお'];
 // こうすると一つ一つの文字が要素として展開された配列になる
 const testMoji2 = [...testMoji];
+
+const feline = {legs: 4, family: 'ネコ科'};
+const canine = {family: イヌ科, bark: true};
+
+// オブジェクトの場合、こうするとfelineのfamilyがcanineのfamilyに上書きされる
+const catDog = {...feline, ...canine};
+
+const newFeline = {...feline, id: 123, isVerified: false}
+
