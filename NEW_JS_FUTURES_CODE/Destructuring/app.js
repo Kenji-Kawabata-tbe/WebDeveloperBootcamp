@@ -46,3 +46,53 @@ const user2 = {
 }
 //デフォルト値を指定することも可能
 const {firstName, lastName, died = 'N/A'} = user2;
+
+
+
+//パラメーターの分割代入
+//function fullName(user) {
+//    return `${user.firstName} ${user.lastName}`:
+//}
+//function fullName(user) {
+//    const { firstName, lastName } = user2;
+//    return `${firstName} ${lastName}`;
+//}
+
+function fullName({ firstName, lastName }) {
+    return `${firstName} ${lastName}`;
+}
+fullName(user2);
+
+
+const movies = [
+    {
+        title: 'Amadeus',
+        score: 99,
+        year: 1984
+    },
+    {
+        title: 'Stand By Me',
+        score: 85,
+        year: 1986
+    },
+    {
+        title: 'Parasite',
+        score: 95,
+        year: 1984
+    },
+    {
+        title: 'Alien',
+        score: 90,
+        year: 1979
+    }
+]
+
+movies.filter(movie => movie.socre >= 90);
+movies.filter(({score}) => score >= 90);
+
+movies.map(movie => {
+    return `${movie.title}(${movie.year}): ${movie.score}/100`;
+})
+movies.map(({title, year, score}) => {
+    return `${title}(${year}): ${score}/100`;
+})
