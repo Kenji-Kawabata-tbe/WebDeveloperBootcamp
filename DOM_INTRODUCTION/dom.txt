@@ -1,0 +1,10 @@
+DOM
+Document Object Model
+
+DOMはWebページをJavaScriptで表現したもの
+WebページとJavaScriptを接続するもの
+言ってしまえばJavaScriptで扱えるオブジェクトの集まり
+
+Document
+documentオブジェクトがDOMの世界へのエントリーポイントとなっている。
+Webページのあらゆるコンテンツを表していて、便利なプロパティやメソッドも多数用意されている
