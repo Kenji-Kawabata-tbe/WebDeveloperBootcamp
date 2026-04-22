@@ -15,3 +15,20 @@ const links = document.querySelectorAll('p a');
 for (let link of links) {
     console.log(link.href);
 }
+
+//要素をIDで取得してimageという変数に代入
+const image = document.getElementById('unicorn')
+//要素をIDで取得してheadingという変数に代入
+const heading = document.getElementById('mainheading')
+
+//要素をtagで取得してallImagesという変数に代入
+const allImages = document.getElementsByTagName('img');
+for (let img of allImages) {
+    img.src = 'https://********'
+}
+
+//要素をclassで取得してsquareImagesという変数に代入
+const squareImages = document.getElementsByClassName('square');
+for (let img of squareImages) {
+    img.src = 'https://********'
+}
