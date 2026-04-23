@@ -32,3 +32,20 @@ const squareImages = document.getElementsByClassName('square');
 for (let img of squareImages) {
     img.src = 'https://********'
 }
+
+// document.querySelector
+// 単一の要素を取得できるセレクターメソッド
+// 最初に見つけた一つを取得する
+const links = document.querySelector('p');
+
+
+// document.querySelectorAll
+// 対象となる要素全てを取得するセレクターメソッド
+const links = document.querySelectorAll('p a');
+
+for (let link of links) {
+    console.log(link.href);
+}
+
+const doneTodos = document.getElementsByClassName('done');
+const checkbox = document.querySelector('input[type="checkbox"]');
