@@ -46,6 +46,8 @@ const links = document.querySelectorAll('p a');
 for (let link of links) {
     console.log(link.href);
 }
+const links = document.querySelectorAll('a')[2];
+
 
 const doneTodos = document.getElementsByClassName('done');
 const checkbox = document.querySelector('input[type="checkbox"]');
