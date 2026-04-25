@@ -1,3 +1,33 @@
+////要素をIDで取得してimageという変数に代入
+//const image = document.getElementById('unicorn')
+////要素をIDで取得してheadingという変数に代入
+//const heading = document.getElementById('mainheading')
+
+////要素をtagで取得してallImagesという変数に代入
+//const allImages = document.getElementsByTagName('img');
+//for (let img of allImages) {
+//    img.src = 'https://********'
+//}
+
+////要素をclassで取得してsquareImagesという変数に代入
+//const squareImages = document.getElementsByClassName('square');
+//for (let img of squareImages) {
+//    img.src = 'https://********'
+//}
+
+//// document.querySelector
+//// 単一の要素を取得できるセレクターメソッド
+//// 最初に見つけた一つを取得する
+//const links = document.querySelector('p');
+
+//// document.querySelectorAll
+//// 対象となる要素全てを取得するセレクターメソッド
+//const links = document.querySelectorAll('p a');
+
+
+
+
+
 const allLinks = document.querySelectorAll('a');
 
 // for (let link of allLinks) {
@@ -70,3 +100,59 @@ const spans = document.querySelectorAll('h1 span');
 spans.forEach((span, index) => {
   span.style.color = colors[index];
 });
+
+
+const h2 = document.querySelector('h2')
+// クラスの取得
+h2.getAttribute('class')
+// クラスの適用
+h2.setAttribute('class', 'purple')
+// こうすると前のpurpleも上書きされちゃう
+h2.setAttribute('class', 'border')
+const currentClasses = h2.getAttribute('class');
+currentClasses
+// 両方のクラスの適用 面倒なやり方
+h2.setAttribute('class', `${currentClasses} purple`);
+
+
+const h2 = document.querySelector('h2')
+h2.classList
+// classList.addで今のクラスに追加できる
+h2.classList.add('purple')
+h2.classList.add('border')
+h2.classList.remove('border')
+// 適用されているかいないかがbooleanで返ってくる
+h2.classList.contains('border')
+// 切り替える。適用されている場合は外す、外れるている場合は適用する。トグル。
+h2.classList.toggle('border')
+
+const liList = document.querySelectorAll('li')
+liList.forEach(li => {
+    li.classList.toggle('highlight');
+  });
+
+
+
+const firstBold = document.querySelector('b');
+firstBold
+// 親要素を確認
+firstBold.parentElement
+// さらに上の親を辿っていける
+firstBold.parentElement.parentElement
+// 子要素を確認
+firstBold.children
+
+const paragraph = firstBold.parentElement
+paragraph.children
+
+const squareImg = document.querySelector('.square');
+squareImg
+squareImg.parentElement
+squareImg.children
+
+// 次の要素ではなく次のノードを返す
+squareImg.nextSibling
+// 次の要素を返す
+squareImg.nextElementSibling
+// 前の要素を返す
+squareImg.previousElementSibling
