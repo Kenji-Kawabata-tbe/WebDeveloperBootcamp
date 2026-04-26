@@ -156,3 +156,56 @@ squareImg.nextSibling
 squareImg.nextElementSibling
 // 前の要素を返す
 squareImg.previousElementSibling
+
+
+// 要素のオブジェクトを作る この場合，img要素のnewImgというオブジェクト
+const newImg = document.createElement('img')
+// 作ったオブジェクトに値を入れる
+newImg.src = 'https://images.XXXXX'
+// 要素を別の要素の子要素として追加。この場合、一番後ろに追加される
+document.body.appendChild(newImg)
+newImg.classList.add('square')
+
+const newH3 = document.createElement('h3')
+newH3.innerText = '新規要素参上'
+document.body.appendChild(newH3)
+
+const p = document.querySelector('p')
+// apend 値を子要素として直接後ろに追加できる
+p.append('おおおお')
+// prepend 値を子要素として直接先頭に追加できる
+p.prepend('ああああ')
+
+const h2 = document.createElement('h2')
+h2.append('可愛らしい烏骨鶏')
+const h1 = document.querySelector('h1')
+// 兄弟要素として追加する
+// h1の直後にh2を入れる　
+h1.insertAdjacentElement('afterend', h2);
+
+h3.innerText = 'H3!!!'
+// h2の直後にh3を追加
+h2.after(h3)
+
+const container = document.getElementById('container');
+
+for (let i = 1; i <= 100; i++) {
+  const button = document.createElement('button');
+  button.textContent = `Button ${i}`;
+  container.appendChild(button);
+}
+
+
+const firstLi = document.querySelector('li')
+// 子要素の削除。
+// firstLiを消したい場合、親要素を辿ってその子要素を削除する
+const ul = firstLi.parentElement
+ul.removeChild(firstLi)
+
+//　まとめて書くこともできる
+const b = document.querySelector('b')
+b.parentElement.removeChild(b)
+
+// remove シンプルに要素の削除ができる
+const img = document.querySelector('img')
+img.remove()
