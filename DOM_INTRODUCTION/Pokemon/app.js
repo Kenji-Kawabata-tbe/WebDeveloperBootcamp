@@ -4,6 +4,11 @@ const container = document.querySelector('#container');
 const baseURL = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/';
 
 for (let i = 1; i <= 151; i++) {
+    // こういう構成にしたい
+    /* <div>
+        <img></img>
+        <span>#2</span>
+    </div> */
     const pokemon = document.createElement('div');
     pokemon.classList.add('pokemon');
 
@@ -17,7 +22,3 @@ for (let i = 1; i <= 151; i++) {
     container.appendChild(pokemon);
 }
 
-/* <div>
-    <img></img>
-    <span>#2</span>
-</div> */
