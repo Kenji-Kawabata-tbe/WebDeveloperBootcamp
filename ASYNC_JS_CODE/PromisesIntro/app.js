@@ -131,6 +131,7 @@ fakeRequestPromise('yelp.com/api/coffee/page1')
 
 
 //promiseが成功した時と失敗した時の値
+//この場合、dataにresolveの値が入り、errにrejectの値が入る
 fakeRequestPromise('yelp.com/api/coffee/page1')
     .then((data) => {
         console.log('成功1！！！');
