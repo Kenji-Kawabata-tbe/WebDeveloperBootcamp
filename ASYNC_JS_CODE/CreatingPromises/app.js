@@ -34,7 +34,7 @@ const fakeRequest = (url) => {
     });
 }
 
-
+//dataとerrにはそれぞれresolveとrejectの値が入る
 fakeRequest('/hoge')
     .then((data) => {
         console.log('成功!!!');

@@ -71,6 +71,13 @@ login('hoge', 'secret')
 
 
 
+// await
+// 非同期のコードを同期的なコードのように書くことができる
+// awaitはasync関数の中でしか使えない
+// awaitはpromiseがresolveまたはrejectするまでasync関数の実行を一時的に停止する
+//
+
+
 const delayedColorChange = (color, delay) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -89,6 +96,7 @@ const delayedColorChange = (color, delay) => {
 //     .then(() => delayedColorChange('violet', 1000))
 
 async function rainbow() {
+    // awaitを入れることでpromiseがresolveもしくはrejectするのを待つ
     await delayedColorChange('red', 1000);
     await delayedColorChange('orange', 1000);
     await delayedColorChange('yellow', 1000);
@@ -103,6 +111,7 @@ async function rainbow() {
 //         console.log('rainbow完了！');
 //     });
 
+//これでrainbowが完了した後にrainbow完了が出力される。直前のコメントアウトと同じ処理。
 async function printRainbow() {
     await rainbow();
     console.log('rainbow完了!!!');
@@ -125,13 +134,21 @@ const fakeRequest = (url) => {
 }
 
 async function makeRequest() {
+    // これでfakeRequestがresolveした値がdata1に入るの(`ダミーデータ(${url})`が出力される
+    const data1 = await fakeRequest('/hoge');
+    console.log(data1);
+}
+
+async function makeRequest() {
     try {
         const data1 = await fakeRequest('/hoge1');
         console.log(`data1: ${data1}`);
         const data2 = await fakeRequest('/hoge2');
         console.log(`data2: ${data2}`);
+    // tryが失敗したらcatchの処理に入る
     } catch (e) {
         console.log('エラー発生！！！');
+        // この場合eにfakeRequestがrejectした値が入るので'コネクションタイムアウト'が出力される
         console.log(e);
     }
 }
