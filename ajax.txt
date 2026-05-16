@@ -1,7 +1,34 @@
 AJAX(Asynchronous Javascript And Xml)
 JavaScriptからリクエストを送ること
 データそのものが帰ってくる
-
+データというのはHTMLやCSSと違って装飾する情報だったり動きのための情報ではないということ
+受け取るのは必要とするデータのみ
 AJAXを使うことで情報を送ったり取得したりする処理をWebページの裏側で行うことができる。
 ページを再読み込みしたり違うページに移らないといけなかったものが同じページにいながら行うことができる。
 スクロールで新しい画像を読み込めたり検索窓に文字列を入れるだけで候補が出てきたり。
+
+
+API(Application Programing Interface)
+ソフトウェア同士が互いに情報のやり取りをするためのインターフェースのこと
+Javascriptではリクエストを投げてデータを受け取る仕組み
+Web系エンジニアがAPIと言った場合は大体WebAPIのことを言っている
+Web APIはAPIの中でもWebが基盤になっているもの。
+具体的にはHTTPでの情報のやり取りをするインターフェースのこと。特定のURLに対してリクエストを投げる。
+このURLのことをエンドポイントとも言う。
+
+XML(Extensible Markup Language)
+Web APIが返すデータに特化したフォーマット。
+HTMLっぽい見た目。タグに相当する部分の名前を自分で決める。
+最近ではHTMLの方がメジャー。
+AJAXといっても実際はXMLではなくJSONの方が多いので実質AJAJ。
+ただ呼び方はAJAXと言われるまま。
+
+JSON(JavaScript Object Notation)
+XMLと同じでWeb APIが返すデータに特化したフォーマット。
+ソフトウェア同士でデータのやり取りをするためのテキストベースの共通のフォーマット
+JavaScriptのオブジェクトに似ているが違うもの。
+　キーは必ずダブルクォートで囲む。
+　undefinedという値がない。
+　JavaScriptだけじゃなくあらゆる言語で使える。
+json.parseでJSONをJavaScriptのオブジェクトに変換できる。
+json.stringifyで逆にJavaScriptのオブジェクトをJSONに変換できる。
