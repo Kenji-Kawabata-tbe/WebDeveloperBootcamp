@@ -32,3 +32,5 @@ JavaScriptのオブジェクトに似ているが違うもの。
 　JavaScriptだけじゃなくあらゆる言語で使える。
 json.parseでJSONをJavaScriptのオブジェクトに変換できる。
 json.stringifyで逆にJavaScriptのオブジェクトをJSONに変換できる。
+
+5/17 279,280
