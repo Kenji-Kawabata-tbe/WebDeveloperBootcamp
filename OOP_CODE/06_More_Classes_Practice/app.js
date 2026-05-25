@@ -4,6 +4,7 @@ class Color {
 		this.g = g;
 		this.b = b;
 		this.name = name;
+		//コンストラクタでメソッドを指定することもできる
 		this.calcHSL();
 	}
 	innerRGB() {

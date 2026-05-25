@@ -38,6 +38,8 @@ Color.prototype.hex = function () {
 //     ->新しいオブジェクトのプロトタイプにcolor(この場合の例)のプロトタイプを関連付けている
 // 3. ステップ 1 で新しく作成されたオブジェクトを this コンテキストとして渡します。
 // 4. 関数がオブジェクトを返さない場合(returnが無い場合)は this を返します。
+// 
+// ちなみに雛形のcolorから作ったオブジェクトのことをcolorのインスタンスと呼ぶ
 const color1 = new Color(40, 255, 60);
 //実際に適用
 //document.body.style.backgroundColor = color1.rgb()
