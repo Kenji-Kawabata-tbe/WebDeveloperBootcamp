@@ -1,0 +1,3 @@
+node.jsとは？
+JavaScriptのランタイム。
+元々はJavaScriptはブラウザでしか動かなかったが、JavaScriptをブラウザの外で実装できるようにしたもの。
