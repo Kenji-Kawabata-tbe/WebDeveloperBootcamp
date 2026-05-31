@@ -31,3 +31,7 @@ module.exports.square = square;
 //exports.square = square;
 //こうするともともとの定義を上書きしてしまうのでNG
 //exports = 'hoge'
+
+// ディレクトリごと読み込むこともできる
+const cats = require('./shelter')
+console.log('ディレクトリをrequire:', cats);
