@@ -1,0 +1,35 @@
+npm(node package manager)
+2つの意味がある
+1,他の開発者が公開している何万ものパッケージが管理されている場所(正式にはnpmレジストリ)。
+2,これらのパッケージをnode.jsのプロジェクトに簡単にインストールし管理するためのコマンドラインツール
+
+ローカルインストール
+例
+give-me-a-joke
+https://www.npmjs.com/package/give-me-a-joke
+npm install give-me-a-joke
+省略系で
+npm i give-me-a-joke
+でもいい
+これでカレントディレクトリにgive-me-a-jokeで使うパッケージがインストールされる。インストールされている場所でしか使えない。
+基本的にはこの使い方が多い。プロジェクトによって使うバージョンが違ったりするので。
+node_modules
+ give-me-a-jokeとgive-me-a-jokeが依存(dependency)しているパッケージがまとめてインストールされる
+package-lock.json
+ node_modulesの中にインストールされているパッケージとバージョン等の情報が記載されている
+
+
+グローバルインストール
+管理者になるかsudoをつけて実行する必要がある
+npm install -g cowsay
+どこからでも実行できるようになるが、プロジェクト内でrequireで利用することはできない
+
+
+package.json
+npmがパッケージの情報を管理するためのファイル
+モジュールのバージョンや依存関係が記録されている。特にdependenciesはパッケージの依存関係が記載されているので重要
+npm install <package>でパッケージをインストールすると自動でそのプロジェクト配下に自動で作成される
+npm initで自分でpackage.jsonを作成することもできる。その後にnpm installするとpackage.jsonが無い状態でnpm installしていた時に出ていたエラーが出なくなる
+node_modulesが無くてもpackage.jsonがあるとpackage.jsonファイル内の情報を元にnode_modulesをインストールすることができる
+一般的にはnode_modulesはファイル数も容量も多いのでgit等では除外にする事が多い。
+その場合はpackage.jsonだけを共有して、npm installとするだけでnode_modulesがインストールされる
