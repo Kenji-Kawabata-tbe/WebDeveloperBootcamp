@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ネコたち</title>
+</head>
+<body>
+    <h1>ネコたち</h1>
+    <!-- こうすると配列catsの値がカンマ区切りで横並びでそれぞれ出力される
+    <%= cats %>
+    -->
+    <!-- こうすると配列catsの値がそれぞれliで出力される -->
+    <ul>
+        <% for(let cat of cats) { %>
+            <li><%= cat %></li>
+        <% } %>
+    </ul>
+
+
+
+
+</body>
+</html>

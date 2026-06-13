@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random</title>
+</head>
+<body>
+    <!--
+    テンプレートの中でロジックを直接書くことも出来るが、あまりきれいではないので
+    テンプレートではデータを貰うだけにしてロジックは記載するのが理想
+    <h1>ランダムな値:<%= Math.floor(Math.random() * 10) + 1 %></h1>
+    -->
+    <!-- これで呼び出し元で設定されたnumの値を受け取る-->
+    <h1>ランダムな値:<%= num %></h1>
+
+    <!-- javascriptを書きたいけど表示はさせたくない場合は <% %> にする。 -->
+    <h1>ランダムな値:<%= num %></h1>
+    <% if (num % 2 === 0) { %>
+        <h2>偶数やで</h2>
+    <% } else { %>
+        <h2>奇数でっせ</h2>
+    <% } %>
+    <!-- 三項演算子の場合は式の結果をHTMLに埋め込みたいので<%= %>にする必要がある -->
+    <h3><%= num % 2 === 0 ? '偶数' : '奇数' %></h3>
+</body>
+</html>

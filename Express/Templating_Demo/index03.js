@@ -30,6 +30,13 @@ app.get('/rand', (req, res) => {
     res.render('random', { num });
 });
 
+app.get('/cats', (req, res) => {　
+    const cats = [
+        'タマ', 'トラ', 'クロ', 'モモ', 'ジジ'
+    ];
+    res.render('cats', { cats });
+});
+
 // /r/subredditのsubredditの部分がreq.paramsに入る。
 app.get('/r/:subreddit', (req, res) => {
     // req.paramsの値をsuvredditという変数に格納
