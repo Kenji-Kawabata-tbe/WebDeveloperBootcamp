@@ -6,7 +6,14 @@
     <title>ホーム</title>
   </head>
   <body>
-    <h1>ホームページ</h1>
+    <!--
+    EJSはEJS専用のタグを見つけるとHTMLではなくEJSとして評価するようになる
+    <%=  %>
+    このタグで囲まれると中で評価されたものがHTMLに出力される
+    このタグ内で書かれたものはJavaScriptとして認識される
+    -->
+    <h1>ホームページ<%= 4 + 5 + 1 %></h1> <!-- ホームページ10 -->
+    <h1>ホームページ<%= 'hello world'.toUpperCase() %></h1> <!-- ホームページHELLO WORLD -->
     <p>
       Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam pariatur
       adipisci, aliquam illo voluptate eveniet, neque eius veniam ducimus earum,
