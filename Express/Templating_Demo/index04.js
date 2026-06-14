@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-
+const redditData = require('./data.json');
 
 //EJSをインストール(npm i ejs)していればrequireする必要はなくそのまま使える
 //app.set('view engine', 'ejs');
@@ -30,12 +30,29 @@ app.get('/rand', (req, res) => {
     res.render('random', { num });
 });
 
+app.get('/cats', (req, res) => {　
+    const cats = [
+        'タマ', 'トラ', 'クロ', 'モモ', 'ジジ'
+    ];
+    res.render('cats', { cats });
+});
+
 // /r/subredditのsubredditの部分がreq.paramsに入る。
 app.get('/r/:subreddit', (req, res) => {
     // req.paramsの値をsuvredditという変数に格納
     const { subreddit } = req.params;
+    // redditDataからsubreddit(Pathで指定された値)をキーにして値を取得
+    const data = redditData[subreddit]
     // suvredditというテンプレートにsubreddit変数の値をキー/バリューで渡す
-    res.render('subreddit', { subreddit });
+    //res.render('subreddit', { subreddit });
+    // suvredditというテンプレートにdataをスプレッドで渡す
+    // こうすると{ name: data.name, subscribers: data.subscribers,  }みたいな感じになる
+    // ejs側ではname,subscribers等で呼ぶ
+    if (data) {
+        res.render('subreddit-02', { ...data });
+    } else {
+        res.render('notfound', { subreddit });
+    }
 });
 
 app.listen(3000, () => {

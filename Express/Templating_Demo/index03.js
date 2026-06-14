@@ -46,5 +46,5 @@ app.get('/r/:subreddit', (req, res) => {
 });
 
 app.listen(3000, () => {
-    console.log('ポート3000で待つ受け中...');
+    console.log('ポート3000で待ち受け中...');
 })
