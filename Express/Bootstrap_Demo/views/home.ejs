@@ -1,0 +1,26 @@
+<!-- これで別のファイルに定義された内容を読み込むことができる partialsは任意の名前でOK
+  -とするとhtmlがエスケープされないのでテンプレートとして読み込むことができる
+  エスケープされる場合(%の場合)はhtmlを文字列に含めた場合にそのhtmlがそのままページに出力される
+  -->
+<%- include('partials/head') %>
+
+    <%- include('partials/navbar') %>
+    <!--
+    EJSはEJS専用のタグを見つけるとHTMLではなくEJSとして評価するようになる
+    <%=  %>
+    このタグで囲まれると中で評価されたものがHTMLに出力される
+    このタグ内で書かれたものはJavaScriptとして認識される
+    -->
+    <h1>ホームページ<%= 4 + 5 + 1 %></h1> <!-- ホームページ10 -->
+    <h1>ホームページ<%= 'hello world'.toUpperCase() %></h1> <!-- ホームページHELLO WORLD -->
+    <p>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam pariatur
+      adipisci, aliquam illo voluptate eveniet, neque eius veniam ducimus earum,
+      at suscipit? Ut cupiditate nemo quae, in fugiat quod temporibus?
+    </p>
+    <p>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam pariatur
+      adipisci, aliquam illo voluptate eveniet, neque eius veniam ducimus earum,
+      at suscipit? Ut cupiditate nemo quae, in fugiat quod temporibus?
+    </p>
+<%- include('partials/footer') %>
