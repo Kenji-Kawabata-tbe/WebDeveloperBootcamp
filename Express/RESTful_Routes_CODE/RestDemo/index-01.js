@@ -25,5 +25,3 @@ app.post('/tacos', (req, res) => {
 app.listen(3000, () => {
     console.log('ポート3000で待ち受け中...');
 })
-
-

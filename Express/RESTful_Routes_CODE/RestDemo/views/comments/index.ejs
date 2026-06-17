@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コメント一覧</title>
+</head>
+<body>
+    <h1>コメント一覧</h1>
+    <ul>
+        <% for(let c of comments) { %>
+            <li><%= c.comment %> - <b><%= c.username %></b></li>
+        <% } %>
+    </ul>
+    
+</body>
+</html>
