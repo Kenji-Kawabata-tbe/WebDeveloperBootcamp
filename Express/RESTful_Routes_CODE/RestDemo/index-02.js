@@ -1,6 +1,11 @@
+//コメントの配列とコメントのviewが共にcommentsという名前なので混同しないよう注意
+
 const express = require('express');
 const app = express();
 const path = require('path');
+// 分割代入の時に変数の名前を変えたい場合、:の後ろに新しい変数名を指定することでその変数名で使えるようになる
+const { v4: uuid } = require('uuid');
+uuid();
 
 
 //フォームから渡ってきたデータをパースする
@@ -13,18 +18,26 @@ app.set('view engine', 'ejs');
 
 const comments = [
     {
+        //id: 1,
+        id: uuid(),
         username:'yanada',
         comment: 'おもしろすぎ'
     },
     {
+        //id: 2,
+        id: uuid(),
         username:'suzuki',
         comment: '趣味はバードウォッチング'
     },
     {
+        //id: 3,
+        id: uuid(),
         username:'tanaka',
         comment: 'yamadaさん、何がおもしろいんですか'
     },
     {
+        //id: 4,
+        id: uuid(),
         username:'wanwan',
         comment: 'わんわんわん'
     }
@@ -35,6 +48,38 @@ app.get('/comments', (req, res) => {
     res.render('comments/index', { comments });
 })
 
+app.get('/comments/new', (req, res) => {
+    res.render('comments/new');
+
+})
+
+//POSTリクエスト commentsに入力した内容を追加する
+app.post('/comments', (req, res) => {
+    // app.use(express.urlencoded({ extended: true }));
+    // があるからリクエストの内容を出力できる
+    console.log(req.body);
+    const { username, comment } = req.body;
+    //comments.push({ username, comment });
+    // pushの際にidを付与
+    comments.push({ username, comment, id: uuid() });
+    //これだとページが戻らない。再読み込みで二重登録できてしまう。
+    //res.send('オッケー!!!');
+    // /commentsにリダイレクト302で戻す
+    res.redirect('/comments');
+})
+
+//コメントのIDを返す
+app.get('/comments/:id', (req, res) => {
+    const { id } = req.params;
+    //コメントの中でidがparamsのidと一致するものを探す
+    //idを直接定義している場合、idがstringで定義されているのでintにperseする
+    //const comment = comments.find(c => c.id === parseInt(id));
+    //idをuuidで定義している場合はそのまま使える
+    const comment = comments.find(c => c.id === id);
+
+    //commentに入っている値を一緒にわたす
+    res.render('comments/show', { comment });
+});
 
 //GETリクエストを送る
 app.get('/tacos', (req, res) => {
