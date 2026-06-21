@@ -1,4 +1,12 @@
+// GET /comments - コメント一覧を取得
+// POST /comments - 新しいコメントを作成
+// GET /comments/:id - 特定のコメントを一つ取得
+// PATCH comments/:id - 特定のコメントを更新
+// DELETE comments/:id - 特定のコメントを削除
+
 //コメントの配列とコメントのviewが共にcommentsという名前なので混同しないよう注意
+
+
 
 const express = require('express');
 const app = express();
@@ -21,7 +29,9 @@ app.use(methodOverride('_method'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-const comments = [
+// constだとdelete処理の中でやっている再代入ができないのでletにする
+//const comments = [
+let comments = [
     {
         //id: 1,
         id: uuid(),
@@ -108,6 +118,14 @@ app.patch('/comments/:id', (req, res) => {
     res.redirect('/comments');
 });
 
+app.delete('/comments/:id', (req, res) => {
+    const { id } = req.params;
+    // idと一致しないものでフィルターをかける
+    // そうするとidと一致するものがcommentsからいなくなる
+    comments = comments.filter(c => c.id !== id);
+    res.redirect('/comments');
+});
+
 
 //GETリクエストを送る
 app.get('/tacos', (req, res) => {
@@ -130,9 +148,3 @@ app.listen(3000, () => {
     console.log('ポート3000で待ち受け中...');
 })
 
-
-// GET /comments - コメント一覧を取得
-// POST /comments - 新しいコメントを作成
-// GET /comments/:id - 特定のコメントを一つ取得
-// PATCH comments/:id - 特定のコメントを更新
-// DELETE comments/:id - 特定のコメントを削除
