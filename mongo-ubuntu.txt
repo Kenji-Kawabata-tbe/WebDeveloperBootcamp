@@ -1,0 +1,53 @@
+■ubuntu
+install
+https://www.mongodb.com/try/download/community
+sudo systemctl start mongod
+mongosh
+
+show databases
+show dbs
+
+use animalShelter
+
+// オブジェクトを一つ挿入
+db.dogs.insertOne({name: 'ポチ', age: 3, breed: 'corgi', catFriendly: true})
+show collections // collectionは関連のあるデータがまとまったもの。テーブルみたいな感じ
+dogs
+db.dogs.find()
+[
+  {
+    _id: ObjectId('6a39d8d04ef03e5c7c9df8a3'),
+    name: 'ポチ',
+    age: 3,
+    bredd: 'corgi',
+    catFriendly: true
+  }
+]
+
+db.cats.insertOne({name: 'タマ', age: 6, dogFriendly: false, breed: 'scottish fold'})
+db.cats.find()
+
+
+
+// オブジェクトを複数挿入。insertManyでもできる
+db.dogs.insert([{name: 'ハチ', breed: 'golden', age: 14, catFriendly: false}, { name: 'チョコ', breed: 'chihuahua', age: 17, catFriendly: true}])
+
+
+// データを検索
+db.dogs.find({breed: 'corgi'})
+db.dogs.find({catFriendly: true}) // findだとカーソル(ポインタみたいなもの)を返す。大量だと要領悪いから。
+db.dogs.findOne({catFriendly: true}) //合致するうちの一つだけ。ドキュメントを返す。
+db.dogs.find({catFriendly: true, age: 17})
+
+//データを更新
+//nameがポチのドキュメントに対してageを4にする
+db.dogs.updateOne({name: 'ポチ'}, {$set: { age: 4} })
+db.dogs.find({name: 'ポチ'})
+db.dogs.updateOne({name: 'ポチ'}, {$set: { age: 5, breed: 'corgi'} })
+//無いキーを指定すると追加される
+db.dogs.updateOne({name: 'ポチ'}, {$set: { color: 'chocolate'} })
+
+db.dogs.updateMany({catFriendly: true}, {$set: { isAvailable: false} })
+//lastChangedというキーに現在の日時を入れる
+db.cats.updateOne({age: 6}, {$set: { age: 7}, $currentDate: {lastChanged: true} })
+db.cats.findOne
