@@ -38,6 +38,10 @@ db.dogs.find({breed: 'corgi'})
 db.dogs.find({catFriendly: true}) // findだとカーソル(ポインタみたいなもの)を返す。大量だと要領悪いから。
 db.dogs.findOne({catFriendly: true}) //合致するうちの一つだけ。ドキュメントを返す。
 db.dogs.find({catFriendly: true, age: 17})
+//ネストされたプロパティで絞る
+db.dogs.find({'hoge1.hoge2': true})
+db.dogs.find({'hoge1.hoge2': true, age: 10})
+
 
 //データを更新
 //nameがポチのドキュメントに対してageを4にする
@@ -51,3 +55,21 @@ db.dogs.updateMany({catFriendly: true}, {$set: { isAvailable: false} })
 //lastChangedというキーに現在の日時を入れる
 db.cats.updateOne({age: 6}, {$set: { age: 7}, $currentDate: {lastChanged: true} })
 db.cats.findOne
+
+//データを削除
+db.cats.deleteOne({name: 'タマ'})
+db.cats.deleteMany({isAvailable: false})
+db.dogs.deleteMany({}) //　絞り込みをせずに全部消す
+db.dogs.find
+
+//演算子
+db.dogs.find({age: { $gt: 10}}) // ageが10より大きい
+db.dogs.find({age: { $gte: 10}}) // ageが10以上
+db.dogs.find({age: { $lt: 10}}) // ageが10より小さい
+db.dogs.find({breed: { $in: ['shiba', 'corgi'] }}) //in句。breedにShibaかCorgiがあるか
+db.dogs.find({breed: { $nin: ['shiba', 'corgi'] }}) //ninはnot inになる
+db.dogs.find({breed: { $in: ['shiba', 'corgi'] }, age: { $gt: 2}})
+
+//比較演算子
+//or
+db.dogs.find({$or: [{breed: { $in: ['shiba', 'corgi']}},{age: { $gt: 10}, }]})
