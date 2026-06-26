@@ -73,3 +73,5 @@ db.dogs.find({breed: { $in: ['shiba', 'corgi'] }, age: { $gt: 2}})
 //比較演算子
 //or
 db.dogs.find({$or: [{breed: { $in: ['shiba', 'corgi']}},{age: { $gt: 10}, }]})
+
+
