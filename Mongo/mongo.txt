@@ -1,3 +1,35 @@
+■mac
+https://www.mongodb.com/ja-jp/docs/get-started/?language=nodejs
+の
+フル機能の配置を設定する
+まで実施
+
+                              ✘ 1 main ✱ ◼
+~/g/WebDeveloperBootcamp ❯❯❯ mongosh                                ✘ 1 main ✱ ◼
+Current Mongosh Log ID:	6a37dad16b9c58919cb15178
+Connecting to:		mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.8.3
+MongoNetworkError: connect ECONNREFUSED 127.0.0.1:27017
+
+~/g/WebDeveloperBootcamp ❯❯❯ atlas local setup myDeployment \       ✘ 1 main ✱ ◼
+                                 --mdbVersion 8.0 --port 27017 --connectWith connectionString
+Installing first class plugin atlas-local-plugin
+Plugin mongodb/atlas-local-cli successfully installed
+> How do you want to set up your local Atlas deployment? With default settings
+[1/4] [✅]   Pulling the latest version of the MongoDB image...
+[2/4] [✅]   Creating the deployment...
+[3/4] [✅]   Starting the deployment...
+[4/4] [✅]   Waiting for the deployment to be healthy...                        Successfully setup deployment 'myDeployment'
+MongoDB version: 8.0.26
+Port: 27017
+Load sample data: false
+Connection string: mongodb://127.0.0.1:27017/?directConnection=true
+~/g/WebDeveloperBootcamp ❯❯❯
+
+・dockerでmyDeployment起動
+・mongosh
+
+
+
 ■ubuntu
 install
 https://www.mongodb.com/try/download/community
