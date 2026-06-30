@@ -8,6 +8,10 @@ mongoose.connect('mongodb://localhost:27017/movieApp', { useNewUrlParser: true, 
         console.log(err);
     })
 
+// 以降はthenの結果を待たずに実行しているけど、mongooseは起動直後に即座に使えると
+// ドキュメントに書いてあるのでその通りにしている
+
+
 //スキーマの定義。RDBでいうテーブルに近い？
 //Mongdbにはスキーマの概念はないので。mongooseにある概念。
 const movieSchema = new mongoose.Schema({
@@ -81,3 +85,8 @@ Movie.insertMany([
 //// findOneAndUpdateだとコンソールに対象のオブジェクトを表示する。ただしデフォルトは更新前の情報。
 //Movie.findOneAndUpdate({title: 'The Iron Gian'}, {title: 'The Iron Giant'}).then(m => console.log(m))
 //Movie.findOneAndUpdate({title: 'The Iron Giant'}, {score: 7.8}, {new: true}).then(m => console.log(m))
+
+// Mongooseでデータの削除
+//Movie.deleteOne({title: 'Amelie'}).then(msg => console.log(msg))
+//Movie.deleteMany({year: {$gte: 1999}}).then(msg => console.log(msg))
+//Movie.findOneAndDelete({title: 'Alien'}).then(m => console.log(m))
