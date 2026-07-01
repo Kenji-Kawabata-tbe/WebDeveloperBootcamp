@@ -1,44 +1,94 @@
 // 実行
 // node product.js
 
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/shopApp', { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => {
-        console.log('コネクションOK！！');
-    })
-    .catch(err => {
-        console.log('コネクションエラー！！！');
-        console.log(err);
-    });
+const mongoose = require("mongoose");
+mongoose
+  .connect("mongodb://localhost:27017/shopApp", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("コネクションOK！！");
+  })
+  .catch((err) => {
+    console.log("コネクションエラー！！！");
+    console.log(err);
+  });
 
 // スキーマの定義をオブジェクトでより細かく。
 const productScheam = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true
+  name: {
+    type: String,
+    required: true,
+    maxLength: 10,
+  },
+  price: {
+    type: Number,
+    required: true,
+    min: 0,
+  },
+  onSale: {
+    type: Boolean,
+    default: false,
+  },
+  categories: [String],
+  qty: {
+    online: {
+      type: Number,
+      default: 0,
     },
-    price: {
-        type:Number,
-        required: true
-
-    }
+    inStore: {
+      type: Number,
+      default: 0,
+    },
+  },
 });
 
-const Product = mongoose.model('Product', productScheam);
+const Product = mongoose.model("Product", productScheam);
 
 const bike = new Product({
-    name: 'マウンテンバイク',
-    price: 59800,
-    //price: '59800' numberぽく見えるものならtype:Numberでも入る
-    color: 'red' //スキーマに定義されていないプロパティを入れてもエラーにならないが作成されない
-})
+  name: "マウンテンバイク",
+  price: 59800,
+  //price: '59800' numberぽく見えるものならtype:Numberでも入る
+  color: "red", //スキーマに定義されていないプロパティを入れてもエラーにならないが作成されない
+  categories: ["サイクリング", "アウトドア"],
+});
 
-bike.save()
-    .then(data => {
-        console.log('成功!!!');
-        console.log(data);
-    })
-    .catch(err => {
-        console.log('エラー!!!');
-        console.log(err.errors.name.properties.message);
-    })
+bike
+  .save()
+  .then((data) => {
+    console.log("成功!!!");
+    console.log(data);
+  })
+  .catch((err) => {
+    console.log("エラー!!!");
+    console.log(err);
+  });
+
+//const air = new Product({
+//    name: '空気入れ',
+//    price: 1980,
+//    categories: ['サイクリング']
+//})
+//
+//air.save()
+//    .then(data => {
+//        console.log('成功!!!');
+//        console.log(data);
+//    })
+//    .catch(err => {
+//        console.log('エラー!!!');
+//        console.log(err.errors.name.properties.message);
+//    })
+
+//priceはmin:0だが、findOneAndUpdateではデフォルトではマイナスで更新できてしまう。
+//なのでバリデーションを有効にしたい場合はrunValidatorsをtrueにする
+Product.findOneAndUpdate({ name: "空気入れ" }, { price: 1980 }, { new: true, runValidators: true })
+  .then((data) => {
+    console.log("成功!!!");
+    console.log(data);
+  })
+  .catch((err) => {
+    console.log("エラー!!!");
+    console.log(err);
+  });
