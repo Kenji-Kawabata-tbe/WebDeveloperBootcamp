@@ -50,7 +50,7 @@ const productScheam = new mongoose.Schema({
   }
 });
 
-//
+// スキーマにインスタンスメソッドを追加
 productScheam.methods.greet = function() {
   console.log('はろーやっほー');
   console.log(`- ${this.name}からの呼び出し`);
@@ -69,6 +69,11 @@ productScheam.methods.addCategory = function(newCat) {
 
 }
 
+// スタティックメソッドの追加
+productScheam.statics.fireSale = function () {
+  return this.updateMany({}, { onSale: true, price: 0});
+}
+
 const Product = mongoose.model("Product", productScheam);
 
 const findProduct = async () => {
@@ -82,6 +87,8 @@ const findProduct = async () => {
 }
 
 findProduct();
+
+//Product.fireSale().then(msg => console.log(msg));
 
 const bike = new Product({
   name: "マウンテンバイク",
