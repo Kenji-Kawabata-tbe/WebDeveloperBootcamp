@@ -1,10 +1,14 @@
+// nodemon index.jsでサーバが立ち上がる
+
 const express = require('express');
 const app = express();
 const path = require('path');
 const mongoose = require("mongoose");
 
+const Product = require('./models/product');
+
 mongoose
-.connect("mongodb://localhost:27017/shopApp", {
+.connect("mongodb://localhost:27017/farmStand", {
   })
   .then(() => {
     console.log("MongoDB コネクションOK！！");
@@ -25,6 +29,15 @@ app.set('view engine', 'ejs');
 
 app.get('/dog', (req, res) => {
   res.send('わんわん');
+})
+
+app.get('/products', async (req, res) => {
+  const products = await Product.find({});
+  //console.log(products);
+  //res.send('商品一覧を表示予定');
+  //テンプレートを使う
+  //res.render('products/index');
+  res.render('products/index', { products });
 })
 
 // listen() expressがリクエストを受け付ける状態になる
