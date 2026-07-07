@@ -26,11 +26,18 @@ mongoose
 app.set('views', path.join(__dirname, 'views'));
 //EJSをインストール(npm i ejs)していればrequireする必要はなくそのまま使える
 app.set('view engine', 'ejs');
+//フォームから渡ってきたデータをパースする
+//ポストで送られてくるデータには種類(フォーマット)がある。
+//受け取る側もそれを変換(パース)するかという事を意識しないといけない
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/dog', (req, res) => {
   res.send('わんわん');
 })
 
+const categories = ['果物', '野菜', '乳製品'];
+
+//商品一覧
 app.get('/products', async (req, res) => {
   const products = await Product.find({});
   //console.log(products);
@@ -38,6 +45,29 @@ app.get('/products', async (req, res) => {
   //テンプレートを使う
   //res.render('products/index');
   res.render('products/index', { products });
+})
+
+//商品登録ページ
+app.get('/products/new', (req, res) => {
+    res.render('products/new', { categories });
+});
+app.post('/products', async (req, res) => {
+    const newProduct = new Product(req.body);
+    await newProduct.save();
+    //みたいにすると登録した後に再読み込みした場合にフォームが再実行されるので
+    //別のページにリダイレクトしたほうがいい
+    //res.send('新規作成');
+    res.redirect(`/products/${newProduct._id}`);
+});
+
+
+//商品ページ
+app.get('/products/:id', async (req, res) => {
+  const { id } = req.params;
+  const product = await Product.findById(id);
+  //console.log(product);
+  //res.send('詳細ページ');
+  res.render('products/show', { product });
 })
 
 // listen() expressがリクエストを受け付ける状態になる
