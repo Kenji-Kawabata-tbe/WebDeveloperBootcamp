@@ -28,6 +28,7 @@ app.set("view engine", "ejs");
 //フォームから渡ってきたデータをパースする
 //ポストで送られてくるデータには種類(フォーマット)がある。
 //受け取る側もそれを変換(パース)するかという事を意識しないといけない
+//これがないとpostをexpressで使えない
 app.use(express.urlencoded({ extended: true }));
 //get,post以外のメソッドも使えるように
 app.use(methodOverride("_method"));
