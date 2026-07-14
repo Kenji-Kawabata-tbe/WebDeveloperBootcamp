@@ -12,3 +12,6 @@ show dbs
 use yelp-camp
 show collections
 db.campgrounds.find()
+
+
+
