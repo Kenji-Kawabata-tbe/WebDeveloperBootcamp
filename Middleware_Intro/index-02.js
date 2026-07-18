@@ -15,10 +15,28 @@ app.use((req, res, next) => {
     next();
 })
 
+const verifyPassword = ((req, res, next) => {
+    const { password } = (req.query);
+    if (password === 'supersecret') {
+        return next();
+    }
+    res.send('パスワードが必要です');
+})
+
+//app.use((req, res, next) => {
+//    const { password } = (req.query);
+//    if (password === 'supersecret') {
+//        return next();
+//    }
+//    res.send('パスワードが必要です');
+//})
+
 app.get('/dogs', (req, res, next) => {
     console.log('いぬーーー！！');
     next();
 });
+
+
 
 // immediateでミドルウェアが実行された直後にログを出力 他のmorganを有効にしてログ2回出力とかもできっぽい
 //app.use(morgan('common', { immediate: true }));
@@ -48,6 +66,17 @@ app.get('/', (req, res) => {
 app.get('/dogs', (req, res) => {
     console.log(`リクエスト時刻: ${req.requestTime}`);
     res.send('わんわん');
+});
+
+//指定したリクエストのPathに対して特定のミドルウェアを設定することができる
+//この場合、/secretにverifyPasswordを設定している
+//verifyPasswordのnext()には
+//(req, res) => {
+//    res.send('ここは秘密のページです！！誰にも言わないで！！');
+//}
+//が入るようになる
+app.get('/secret', verifyPassword, (req, res) => {
+    res.send('ここは秘密のページです！！誰にも言わないで！！');
 });
 
 app.use((req, res) => {
