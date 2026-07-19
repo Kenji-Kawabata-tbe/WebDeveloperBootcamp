@@ -1,3 +1,7 @@
+■バージョン
+バージョン1
+finish-424まで
+
 ■初期
 npm i express mongoose@5 ejs
 npm i method-override

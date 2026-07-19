@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const ejsMate = require('ejs-mate');
 const methodOverride = require("method-override");
 const Campground = require('./models/campground');
 
@@ -16,7 +17,9 @@ mongoose
 
 const app = express();
 
-
+//エンジンの指定。
+//EJSを解釈するときはデフォルトのEJSエンジンを使うのではなくejs-mateを使うようにする
+app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
