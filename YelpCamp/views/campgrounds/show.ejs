@@ -1,7 +1,11 @@
 <!-- layouts/boilerplate.ejsにこのテンプレートの設定が入るようになる -->
 <% layout('layouts/boilerplate') %>
 <h1><%= campground.title %></h1>
-<h1><%= campground.location %></h1>
+<h2><%= campground.location %></h2>
+<img src="<%= campground.image %>" alt="">
+<p>
+    <%= campground.description %>
+</p>
 <p>
     <a href="/campgrounds/<%= campground._id %>/edit">編集する</a>
 </p>

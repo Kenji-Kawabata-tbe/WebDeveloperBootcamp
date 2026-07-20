@@ -19,15 +19,9 @@ const seedDB = async () => {
     await Campground.deleteMany({});
     for(let i = 0; i < 50; i++) {
         const randomCityIndex = Math.floor(Math.random() * cities.length);
-        const price = Math.floor(Math.random() * 2000) + 1000;
         const camp = new Campground({
             location: `${cities[randomCityIndex].prefecture}${cities[randomCityIndex].city}`,
-            title: `${sample(descriptors)}・${sample(places)}`,
-            image: `https://picsum.photos/400?random=${Math.random()}`,
-            description: '私も今よくこの自覚家に従ってのの所zから恐れ入りでな。何しろ多年が説明者はいよいよその教育たなかっだけを折っがいるありには意味落ちつくででば、だんだんには思うたなけれたなけれ。主義にしたらのもよく十月にまあうたた。とやかく岡田さんから話書生元々学習が籠っな主義この諸君何か乱暴にというご授業たたたらたから、わが十一月はそこか自分シャツを見えて、大森さんののへ先の私にそんなに皆希望と行っば私女学校にお濫用に反しようにしかるにお返事の入っましましょば、さぞよく納得を進みたていでののやむをえたた。',
-            //price = priceの略
-            price
-
+            title: `${sample(descriptors)}・${sample(places)}`
         });
         await camp.save();
     }
