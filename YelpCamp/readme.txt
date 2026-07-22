@@ -2,6 +2,9 @@
 バージョン1
 finish-424まで
 
+バージョン2 style適用
+finish-まで
+
 ■初期
 npm i express mongoose@5 ejs
 npm i method-override
