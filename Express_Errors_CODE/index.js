@@ -4,6 +4,8 @@ const app = express();
 // ちなみにmorganはデフォルトだとレスポンスが投げられるタイミングでログを出すのでnextがあっても最後に出力される
 const morgan = require('morgan');
 
+const AppError = require('./AppError');
+
 // app.useは全てのリクエストで実行される処理。
 // ミドルウェアを使う場合はapp.useで対象のミドルウェアを指定する
 //app.use(morgan('tiny'));
@@ -21,8 +23,13 @@ const verifyPassword = ((req, res, next) => {
         return next();
     }
     //res.send('パスワードが必要です');
-    throw new Error('パスワードが必要です');
+    //これでエラーのステータスを指定できるけど、毎回書くのしんどいし書き忘れのリスクもある
+    //res.status(401);
+    //独自エラークラスを使う方がベター
+    //errにAppErrorが入る
+    throw new AppError('パスワードが必要です', 401);
 })
+
 
 app.get('/dogs', (req, res, next) => {
     console.log('いぬーーー！！');
@@ -56,7 +63,7 @@ app.get('/', (req, res) => {
 });
 
 //わざとエラー
-//特にエラー処理をしない場合、Expressデフォルトのスタックトレースでエラーハンドリングを行う
+//特にエラー処理をしない場合、Expressデフォルトのエラー処理用ミドルウェアでエラーハンドリングを行う
 app.get('/error', (req, res) => {
     hoge.moge();
 });
@@ -77,10 +84,42 @@ app.get('/secret', verifyPassword, (req, res) => {
     res.send('ここは秘密のページです！！誰にも言わないで！！');
 });
 
+app.get('/admin', (req, res) => {
+    throw new AppError('管理者しかアクセスできません！', 403);
+});
+
 app.use((req, res) => {
     res.status(404).send('ページが見つかりません');
 })
 
+//app.use((err, req, res, next) => {
+//    console.log('*******************');
+//    console.log('*********エラー**********');
+//    console.log('*******************');
+//    //独自のエラーを返す
+//    //res.status(500).send('エラーが発生しました!!!');
+//
+//    //エラーの場合にnextの引数で何も渡さないと次のミドルウェアが呼ばれる
+//    //逆に何かを渡すとエラーハンドリング用のミドルウェアが実行されるようになる
+//    //この場合のerrにはExpressデフォルトのエラー処理用ミドルウェアの処理結果が入っている
+//    console.log(err);
+//    next(err);
+//})
+
+app.use((err, req, res, next) => {
+    //errにAppErrorが渡された時のエラーハンドリング。res.statusでAppErroで取得したパラメーターを使う
+
+    // errから分割代入でstatuだけを取得
+    // ただこれだと/errorの場合にstatusが無いので想定とは違うエラーになる
+    // (app.useなので全ての場合に一致してしまうので/errorの場合でもstatusが必要になるがExpressが生成した標準のエラーオブジェクトにはstatusが入っていない)
+    //const { status } = err;
+    //res.status(status).send('エラー！！！');
+
+    // errから分割代入でstatusとmessageを取得。デフォルト値も=で指定しているので、errにstatusはmessageが入っていないオブジェクトでも対応可能
+    const { status =500, message = '何かエラーが起きました' } = err;
+    res.status(status).send(message);
+
+})
 app.listen(3000, () => {
     console.log('locahost:3000で待受中...');
 });
