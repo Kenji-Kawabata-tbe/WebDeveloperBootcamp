@@ -63,7 +63,8 @@ app.post('/products', async (req, res, next) => {
 //    res.redirect(`/products/${newProduct._id}`);
 //}));
 
-//async関数の場合、エラーをthrowするだけでは出来なくて、nextにエラーを渡す必要がある。
+//async関数の場合、エラーをthrowするだけでは出来なくて、
+// nextにエラーを渡す必要があるので以下は失敗する
 //app.get('/products/:id', async (req, res) => {
 //    const { id } = req.params;
 //    const product = await Product.findById(id);
