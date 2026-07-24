@@ -23,6 +23,9 @@ app.use(methodOverride('_method'))
 
 const categories = ['果物', '野菜', '乳製品'];
 
+// asyncのtry-catchをやってくれる関数
+// 関数を受け取って関数を返す 受け取る関数はasync
+// もしエラーがあればcatchでeを返す
 function wrapAsync(fn) {
     return function (req, res, next) {
         fn(req, res, next).catch(e => next(e));
@@ -47,21 +50,22 @@ app.get('/products/new', (req, res) => {
 // asyncの関数の場合はtry-catchで拾うのがベター。
 // そうすることで自分で作ったエラーでも他のモジュール等が作ったエラーでも全部nextで拾えて独自のエラーハンドラーに渡す事ができる
 // このケースだと登録時のエラーはmongooseでエラーが作成される。
-app.post('/products', async (req, res, next) => {
-    try {
-        const newProduct = new Product(req.body);
-        await newProduct.save();
-        res.redirect(`/products/${newProduct._id}`);
-    } catch (e) {
-        next(e);
-    }
-});
+//app.post('/products', async (req, res, next) => {
+//    try {
+//        const newProduct = new Product(req.body);
+//        await newProduct.save();
+//        res.redirect(`/products/${newProduct._id}`);
+//    } catch (e) {
+//        next(e);
+//    }
+//});
 
-//app.post('/products', wrapAsync(async (req, res) => {
-//    const newProduct = new Product(req.body);
-//    await newProduct.save();
-//    res.redirect(`/products/${newProduct._id}`);
-//}));
+// wrapAsyncですっきりさせた版
+app.post('/products', wrapAsync(async (req, res) => {
+    const newProduct = new Product(req.body);
+    await newProduct.save();
+    res.redirect(`/products/${newProduct._id}`);
+}));
 
 //async関数の場合、エラーをthrowするだけでは出来なくて、
 // nextにエラーを渡す必要があるので以下は失敗する
@@ -86,29 +90,30 @@ app.post('/products', async (req, res, next) => {
 //});
 
 // asyncなのでtry-catchの方がベター
-app.get('/products/:id', async (req, res, next) => {
-    try {
-        const { id } = req.params;
-        const product = await Product.findById(id);
-        if (!product) {
-            //nextを渡すだけだと、エラーは表示されるが、nextの次のres.renderが呼ばれて内部的にはエラーになる
-            //のでnextにreturnを設定する
-            return next(new AppError('商品が見つかりません', 404));
-        }
-        res.render('products/show', { product });
-    } catch (e) {
-        next(e);
-    }
-});
-
-//app.get('/products/:id', wrapAsync(async (req, res) => {
-//    const { id } = req.params;
-//    const product = await Product.findById(id);
-//    if (!product) {
-//        throw new AppError('商品が見つかりません', 404);
+//app.get('/products/:id', async (req, res, next) => {
+//    try {
+//        const { id } = req.params;
+//        const product = await Product.findById(id);
+//        if (!product) {
+//            //nextを渡すだけだと、エラーは表示されるが、nextの次のres.renderが呼ばれて内部//的にはエラーになる
+//            //のでnextにreturnを設定する
+//            return next(new AppError('商品が見つかりません', 404));
+//        }
+//        res.render('products/show', { product });
+//    } catch (e) {
+//        next(e);
 //    }
-//    res.render('products/show', { product });
-//}));
+//});
+
+// wrapAsyncですっきりさせた版
+app.get('/products/:id', wrapAsync(async (req, res) => {
+    const { id } = req.params;
+    const product = await Product.findById(id);
+    if (!product) {
+        throw new AppError('商品が見つかりません', 404);
+    }
+    res.render('products/show', { product });
+}));
 
 app.get('/products/:id/edit', wrapAsync(async (req, res) => {
     const { id } = req.params;
@@ -134,11 +139,16 @@ app.delete('/products/:id', wrapAsync(async (req, res) => {
 
 const handleValidationErr = err => {
     console.log(err);
+    //以下のように出力される
+    //入力内容に誤りがあります...Product validation failed: name: 商品名は必須です
+    //商品名は必須です。はproduct.jsのnameのrequiredで設定している
     return new AppError(`入力内容に誤りがあります...${err.message}`, 400);
 }
 
 app.use((err, req, res, next) => {
+    //errにはvalidationerr(商品登録時に商品名無いとか)やcasterror(存在しないIDを編集しようとするとか)などの種別がある
     console.log(err.name);
+    //errのnameがValidationErrorだったらhandleValidationErrに渡す
     if (err.name === 'ValidationError') err = handleValidationErr(err);
     next(err);
 });
