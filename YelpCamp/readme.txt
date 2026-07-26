@@ -3,7 +3,7 @@
 finish-424まで
 
 バージョン2 style適用
-finish-まで
+finish-442まで
 
 ■初期
 npm i express mongoose@5 ejs

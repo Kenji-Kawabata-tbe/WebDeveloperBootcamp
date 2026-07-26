@@ -45,12 +45,26 @@ app.get('/campgrounds/:id', async(req, res) => {
     res.render('campgrounds/show', { campground });
 });
 
-app.post('/campgrounds', async (req, res) => {
-  //res.send(req.body);
-  const campground = new Campground(req.body.campground);
-  await campground.save();
-  res.redirect(`/campgrounds/${campground._id}`);
-})
+//app.post('/campgrounds', async (req, res) => {
+//  //res.send(req.body);
+//  const campground = new Campground(req.body.campground);
+//  await campground.save();
+//  res.redirect(`/campgrounds/${campground._id}`);
+//})
+
+//エラーハンドリング追加
+//asyncの関数のエラーはtry-catchで拾ってnextで返す
+//nextではエラーハンドリングが呼ばれるので自分で定義したエラーハンドルが呼ばれる
+app.post('/campgrounds', async (req, res, next) => {
+  try {
+    const campground = new Campground(req.body.campground);
+    await campground.save();
+    res.redirect(`/campgrounds/${campground._id}`);
+  } catch (e) {
+    next(e);
+  }
+});
+
 
 //app.get('/makecampground', async (req, res) => {
 //    const camp = new Campground({ title: '私の庭', description: '気軽に安くキャンプ！！' });
@@ -73,6 +87,10 @@ app.delete('/campgrounds/:id', async (req, res) => {
     const { id } = req.params;
     await Campground.findByIdAndDelete(id);
     res.redirect('/campgrounds');
+});
+
+app.use((err, req, res, next) => {
+    res.send('問題が置きました');
 });
 
 app.listen(3000, () => {
