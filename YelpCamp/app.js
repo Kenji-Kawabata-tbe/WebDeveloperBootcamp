@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
+const joi = require('joi');
 const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/ExpressError')
 const methodOverride = require("method-override");
@@ -74,12 +75,29 @@ app.get('/campgrounds/:id', catchAsync(async (req, res) => {
 ////});
 
 app.post('/campgrounds', catchAsync(async (req, res) => {
-    if (!req.body?.campground) {
-        throw new ExpressError(
-            '不正なキャンプ場のデータです',
-            400
-        );
+    //if (!req.body?.campground) {
+    //    throw new ExpressError(
+    //        '不正なキャンプ場のデータです',
+    //        400
+    //    );
+    //}
+    // joi バリデーション用のミドルウェア
+    const campgroundSchema = joi.object({
+        campground: joi.object({
+            title: joi.string().required(),
+            price: joi.number().required().min(0),
+            image: joi.string().required(),
+            location: joi.string().required(),
+            description: joi.string().required()
+        }).required()
+    });
+    // req.bodyからerrorを分割代入して、campgroundSchemaの設定に沿ってバリデートする
+    const { error } = campgroundSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map(detail => detail.message).join(',');
+        throw new ExpressError(msg, 400);
     }
+    //console.log(result);
     const campground = new Campground(req.body.campground);
     await campground.save();
 
@@ -127,8 +145,13 @@ app.all('/{*splat}', (req, res, next) => {
 app.use((err, req, res, next) => {
     //res.send('問題が起きました');
     //errからstatusCodeとmessageを初期値を分割代入。errに上のコードのnext(error)が渡っている
-    const { statusCode = 500, message = '問題が起きました' } = err;
-    res.status(statusCode).send(message);
+    //const { statusCode = 500, message = '問題が起きました' } = err;
+    const { statusCode = 500 } = err;
+    if(!err.message) {
+        err.message = '問題が起きました'
+    }
+    //res.status(statusCode).send(message);
+    res.status(statusCode).render('error', { err });
 });
 
 app.listen(3000, () => {
