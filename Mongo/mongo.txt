@@ -25,6 +25,7 @@ Load sample data: false
 Connection string: mongodb://127.0.0.1:27017/?directConnection=true
 ~/g/WebDeveloperBootcamp ❯❯❯
 
+★macでのmongo起動方法
 ・dockerでmyDeployment起動
 ・mongosh
 
@@ -33,8 +34,10 @@ Connection string: mongodb://127.0.0.1:27017/?directConnection=true
 ■ubuntu
 install
 https://www.mongodb.com/try/download/community
+★★★mongo起動方法★★★
 sudo systemctl start mongod
 mongosh
+★★★★★★★
 
 show databases
 show dbs

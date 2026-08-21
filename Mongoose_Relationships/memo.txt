@@ -1,0 +1,4 @@
+farm.jsでデータをmongoに投入する場合
+Product.insertMany
+のコメントアウト解除して、
+node farm.js
