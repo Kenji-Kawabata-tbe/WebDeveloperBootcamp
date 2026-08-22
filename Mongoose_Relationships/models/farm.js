@@ -1,3 +1,6 @@
+// 1対たくさん
+// 親に子の情報を持たせる
+
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 

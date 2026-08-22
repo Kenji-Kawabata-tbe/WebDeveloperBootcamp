@@ -46,7 +46,7 @@ use animalShelter
 
 // オブジェクトを一つ挿入
 db.dogs.insertOne({name: 'ポチ', age: 3, breed: 'corgi', catFriendly: true})
-show collections // collectionは関連のあるデータがまとまったもの。テーブルみたいな感じ
+show collections // collectionは関連のあるデータがまとまったもの。スキーマみたいな感じ
 dogs
 db.dogs.find()
 [
