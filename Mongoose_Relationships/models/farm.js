@@ -33,23 +33,23 @@ const farmSchema = new Schema({
 const Product = mongoose.model('Product', productSchema);
 const Farm = mongoose.model('Farm', farmSchema);
 
-//Product.insertMany([
-//    {name: 'メロン', price:498, season: 'summer'},
-//    {name: 'スイカ', price:498, season: 'summer'},
-//    {name: 'アスパラガス', price:498, season: 'spring'}
-//])
+Product.insertMany([
+    {name: 'メロン', price:498, season: 'summer'},
+    {name: 'スイカ', price:498, season: 'summer'},
+    {name: 'アスパラガス', price:498, season: 'spring'}
+])
 
 //Farmのオブジェクトを新しく作り、Productのオブジェクトを追加
-//const makeFarm = async () => {
-//    const farm = new Farm({name: 'まったり牧場', city: '淡路島'});
-//    const melon = await Product.findOne({name: 'メロン'});
-//    //farmのproductsにmelonをpushすればproductsにmelonのオブジェクトIDだけが入る
-//    farm.products.push(melon);
-//    await farm.save();
-//    console.log(farm);
-//}
-//
-//makeFarm();
+const makeFarm = async () => {
+    const farm = new Farm({name: 'まったり牧場', city: '淡路島'});
+    const melon = await Product.findOne({name: 'メロン'});
+    //farmのproductsにmelonをpushすればproductsにmelonのオブジェクトIDだけが入る
+    farm.products.push(melon);
+    await farm.save();
+    console.log(farm);
+}
+
+makeFarm();
 
 //既存のFarmのオブジェクトにProductのオブジェクトを追加
 const addProduct = async () => {
