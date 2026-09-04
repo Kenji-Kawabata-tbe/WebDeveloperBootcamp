@@ -5,6 +5,9 @@ finish-424まで
 バージョン2 style適用
 finish-442まで
 
+バージョン3 エラーハンドリング、バリデーション適用
+finish-457まで
+
 ■初期
 npm i express mongoose@5 ejs
 npm i method-override
