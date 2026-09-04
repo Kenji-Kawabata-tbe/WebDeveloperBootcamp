@@ -23,6 +23,7 @@ const farmSchema = new Schema({
     ]
 });
 
+//farmが削除されるとそのfarmのproductsも削除するようにする
 farmSchema.post('findOneAndDelete', async function (farm) {
     if (farm.products.length) {
         const res = await Product.deleteMany({ _id: { $in: farm.products } });
