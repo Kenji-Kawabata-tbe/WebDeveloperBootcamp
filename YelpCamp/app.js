@@ -152,6 +152,16 @@ app.post('/campgrounds/:id/reviews', validateReview, catchAsync(async (req, res)
     res.redirect(`/campgrounds/${campground._id}`);
 }));
 
+app.delete('/campgrounds/:id/reviews/:reviewId', catchAsync(async (req, res) => {
+    const { id, reviewId } = req.params;
+    // $pull 特定の要素を条件を指定して除外
+    // reviewsからreviewIdの値を削除
+    await Campground.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+    await Review.findByIdAndDelete(req.params.reviewId);
+    res.redirect(`/campgrounds/${id}`);
+}));
+
+
 //app.allで全てのメソッドが対象
 //*にすることでどんなパスでも、という意味が追加になる
 app.all('/{*splat}', (req, res, next) => {

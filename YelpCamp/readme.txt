@@ -1,3 +1,5 @@
+http://localhost:3000/campgrounds
+
 ■バージョン
 バージョン1
 finish-424まで
