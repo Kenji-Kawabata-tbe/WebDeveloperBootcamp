@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const review = require('./review');
+const Review = require('./review');
 const Schema = mongoose.Schema;
 
 const campgroundSchema = new Schema({
@@ -15,6 +15,20 @@ const campgroundSchema = new Schema({
             ref: 'Review'
         }
     ]
+});
+
+//レビューの削除
+campgroundSchema.post('findOneAndDelete', async function (doc) {
+    //console.log(doc);
+    if (doc) {
+        await Review.deleteMany({
+            // _idの値がdoc.reviewsに含まれていたら
+            _id: {
+                $in: doc.reviews
+            }
+        })
+
+    }
 });
 
 module.exports = mongoose.model('Campground', campgroundSchema);
