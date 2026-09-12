@@ -5,7 +5,12 @@ const cookieParser = require('cookie-parser');
 
 // 一度cookieを設定するとそのcookieは明示的に削除したり期限が切れない限り保持し続ける
 // なのでcookie-parserをapp.useすると/greetなど他のパスにアクセスした時もリクエストの時にcookieが一緒に送信される
-app.use(cookieParser());
+//app.use(cookieParser());
+
+//cookieParserに署名を設定して署名付きクッキーにする
+//今はmysecretという値をつけているが、普通はしない。
+//また、この値を変えると署名が変わることを意味するのでそれまで送っていたクッキーは全て無効になる
+app.use(cookieParser('mysecret'));
 
 app.get('/greet', (req, res) => {
     //console.log(req.cookies);
@@ -26,6 +31,22 @@ app.get('/setname', (req, res) => {
     res.cookie('name', 'yamadataro');
     res.cookie('animal', 'cat');
     res.send('クッキー送ったよ!!');
+});
+
+app.get('/getsignedcookie', (req, res) => {
+    // fruitというキーでgrapeという値を持ったクッキーが署名付きでレスポンスにのる
+    res.cookie('fruit', 'grape', { signed: true });
+    res.send('署名付きクッキーを返したよ!!');
+});
+
+app.get('/verifyfruit', (req, res) => {
+    //署名付きクッキーはreq.cookiesではなくreq.signedCookieオブジェクトじゃないと使えない
+    //クッキーの値を削除するとレスポンスが空になり、値を書き換えたりするとfalseが返ってくる
+    //console.log(req.cookies);
+    //res.send(req.cookies);
+    console.log(req.signedCookies);
+    res.send(req.signedCookies);
+
 });
 
 app.listen(3000, () => {

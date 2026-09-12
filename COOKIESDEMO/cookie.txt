@@ -1,0 +1,15 @@
+署名
+改ざんされたかどうかを検知するためのもの。
+署名付きクッキーも同じでクッキーの中身が改ざんされていないかどうかをチェックする
+値を隠すための技術ではないので注意
+
+
+HMAC(Hash-based Message Authentication Code)
+認証及び改ざん検出技術の核となるアルゴリズム。アルゴリズムの種類はSHA1とはSHA256とかがある
+CookieParserで使用している
+https://openreplay.com/tools/hmac-generator/
+
+署名付きクッキーは以下のようなものになっている
+s%3Agrape.iAFRE8iCRHWXRV8ttPvGw91hOZJMYJ5lSGfOMSmBiYo
+.より前の部分が元の値で、.の後ろの値がHMACをかけた値。
+grapeっていうクッキーの値かシークレット名が変わると.の後ろの値が変わるので、変わる場合は改ざんされたと判断する。
