@@ -2,12 +2,16 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
+const session = require('express-session');
+const flash = require('connect-flash');
+
 //const joi = require('joi');
 const ExpressError = require('./utils/ExpressError')
 const methodOverride = require("method-override");
 // routeの読み込み
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
+const cookie = require('express-session/session/cookie');
 
 mongoose
   .connect("mongodb://localhost:27017/yelp-camp",
@@ -38,6 +42,32 @@ app.use(express.json());
 app.use(methodOverride('_method'));
 //静的ファイルの読み込み
 app.use(express.static(path.join(__dirname, 'public')));
+
+//セッション関連の設定
+const sessionConfig = {
+  secret: 'mysecret',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    // javascriptからクッキーの値を見れないようにする。セキュリティ面で重要。
+    // デフォルトでもtrueだが分かりやすく明示的に設定している
+    httpOnly: true,
+    // セッションの有効期限
+    maxAge: 1000 * 60 * 60 * 24 * 7
+  }
+};
+app.use(session(sessionConfig));
+
+//フラッシュ関連の設定
+//フラッシュのミドルウェアを作ってどこからでも呼び出せるようにする
+app.use(flash());
+app.use((req, res, next) => {
+  //res.localsであるリクエストのライフサイクル内(一回のリクエスト内)で使える変数を一時的に保存できる
+  //保存した値はテンプレートから自動的に使えるようになるのでどのテンプレートからでもsuccessを使えるようになる
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  next();
+});
 
 app.get('/', (req, res) => {
     res.render('home');
