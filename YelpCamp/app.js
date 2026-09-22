@@ -13,9 +13,10 @@ const localStrategy = require('passport-local');
 const User = require('./models/user')
 
 // routeの読み込み
+const userRoutes = require('./routes/users');
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
-const cookie = require('express-session/session/cookie');
+//const cookie = require('express-session/session/cookie');
 
 mongoose
   .connect("mongodb://localhost:27017/yelp-camp",
@@ -68,7 +69,7 @@ app.use(passport.session());
   //localStrategyというログイン方法を使う
 passport.use(new localStrategy(User.authenticate()));
   //ユーザの情報をどうやって入れたり取り出したりするか
-passport.serializeUser(User.serializeUser);
+passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 //フラッシュ関連の設定
@@ -93,10 +94,10 @@ app.get('/fakeUser', async (req, res) => {
   const user = new User({ email: 'hogegege@example.com', username: 'hogegege' });
   const newUser = await User.register(user, 'mogege');
   res.send(newUser);
-})
-
+});
 
 // routeの読み込み
+app.use('/', userRoutes);
 app.use('/campgrounds', campgroundRoutes);
 app.use('/campgrounds/:id/reviews', reviewRoutes);
 
