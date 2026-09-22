@@ -8,6 +8,10 @@ const flash = require('connect-flash');
 //const joi = require('joi');
 const ExpressError = require('./utils/ExpressError')
 const methodOverride = require("method-override");
+const passport = require('passport');
+const localStrategy = require('passport-local');
+const User = require('./models/user')
+
 // routeの読み込み
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
@@ -58,6 +62,15 @@ const sessionConfig = {
 };
 app.use(session(sessionConfig));
 
+//passport関連の初期化設定
+app.use(passport.initialize());
+app.use(passport.session());
+  //localStrategyというログイン方法を使う
+passport.use(new localStrategy(User.authenticate()));
+  //ユーザの情報をどうやって入れたり取り出したりするか
+passport.serializeUser(User.serializeUser);
+passport.deserializeUser(User.deserializeUser());
+
 //フラッシュ関連の設定
 //フラッシュのミドルウェアを作ってどこからでも呼び出せるようにする
 app.use(flash());
@@ -72,6 +85,16 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
     res.render('home');
 });
+
+// passportでユーザ登録
+// 指定したメールアドレス、ユーザかつパスワードがmogegeをハッシュ化したもので作られる
+// ちなみにPassportのハッシュ化関数はpbkdf2というものを使っている
+app.get('/fakeUser', async (req, res) => {
+  const user = new User({ email: 'hogegege@example.com', username: 'hogegege' });
+  const newUser = await User.register(user, 'mogege');
+  res.send(newUser);
+})
+
 
 // routeの読み込み
 app.use('/campgrounds', campgroundRoutes);

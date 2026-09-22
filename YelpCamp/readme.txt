@@ -14,6 +14,9 @@ finish-466まで
 finish-488まで
 
 バージョン5 ルーティング設定、フラッシュ追加
+finish-507まで
+
+バージョン6 認証(Passport使って。ちなみにPassportのハッシュ関数はpbkdf2)
 finish-まで
 
 

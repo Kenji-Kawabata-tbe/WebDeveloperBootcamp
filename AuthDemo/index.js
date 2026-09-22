@@ -46,11 +46,12 @@ app.get('/register', (req, res) => {
 app.post('/register', async (req, res) => {
     //res.send(req.body);
     const { username, password } = req.body;
-    const hash = await bcrypt.hash(password, 12);
+    //const hash = await bcrypt.hash(password, 12);
     //res.send(hash)
     const user = new User({
         username,
-        password: hash
+        //password: hash
+        password
     });
     await user.save();
     //ログイン状態を保持するためにセッションにユーザIDを保存
@@ -64,18 +65,29 @@ app.get('/login', (req, res) => {
 
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    const user = await User.findOne({ username });
-    //認証
-    const validPassword = await bcrypt.compare(password, user.password);
-    if (validPassword) {
+    //認証 モデル側でパスワードとハッシュ値の比較を行う
+    const foundUser = await User.findAndValidate(username, password);
+    if (foundUser) {
         //ログイン状態を保持するためにセッションにユーザIDを保存
-        req.session.user_id = user._id;
+        req.session.user_id = foundUser._id;
         //res.send('ようこそ！！！');
         res.redirect('/secret');
     } else {
         //res.send('失敗！もう一回試してみてください');
         res.redirect('/login');
     }
+    //const user = await User.findOne({ username });
+    ////認証
+    //const validPassword = await bcrypt.compare(password, user.password);
+    //if (validPassword) {
+    //    //ログイン状態を保持するためにセッションにユーザIDを保存
+    //    req.session.user_id = user._id;
+    //    //res.send('ようこそ！！！');
+    //    res.redirect('/secret');
+    //} else {
+    //    //res.send('失敗！もう一回試してみてください');
+    //    res.redirect('/login');
+    //}
 });
 
 app.post('/logout', (req, res) => {
