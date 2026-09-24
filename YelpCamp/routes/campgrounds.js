@@ -3,7 +3,8 @@ const router = express.Router();
 const catchAsync = require('../utils/catchAsync');
 const ExpressError = require('../utils/ExpressError')
 const Campground = require('../models/campground');
-const { campgroundSchema } = require('../schemas')
+const { campgroundSchema } = require('../schemas');
+const { isLoggedIn } = require('../middleware');
 
 // joi バリデーション用のミドルウェア
 const validateCampground = (req, res, next) => {
@@ -26,7 +27,8 @@ router.get('/', catchAsync(async(req, res) => {
 }));
 
 //順番大事。:idより後ろに設定するとnewをidと勘違いしちゃう。
-router.get('/new', catchAsync(async(req, res) => {
+router.get('/new', isLoggedIn, catchAsync(async(req, res) => {
+
     res.render('campgrounds/new');
 }));
 
@@ -65,7 +67,7 @@ router.get('/:id', catchAsync(async (req, res) => {
 ////});
 
 //ここにpostが来るとvalidateCampgroundが実行される。その後にcatchAsyncが実行される、という順番
-router.post('/', validateCampground, catchAsync(async (req, res) => {
+router.post('/', isLoggedIn, validateCampground, catchAsync(async (req, res) => {
     //if (!req.body?.campground) {
     //    throw new ExpressError(
     //        '不正なキャンプ場のデータです',
@@ -88,7 +90,7 @@ router.post('/', validateCampground, catchAsync(async (req, res) => {
 //    res.send(camp);
 //});
 
-router.get('/:id/edit', async(req, res) => {
+router.get('/:id/edit', isLoggedIn, async(req, res) => {
     const campground = await Campground.findById(req.params.id);
     if (!campground) {
         req.flash('error', 'キャンプ場は見つかりませんでした');
@@ -97,14 +99,14 @@ router.get('/:id/edit', async(req, res) => {
     res.render('campgrounds/edit', { campground });
 });
 
-router.put('/:id', validateCampground, catchAsync(async (req, res) => {
+router.put('/:id', isLoggedIn, validateCampground, catchAsync(async (req, res) => {
     const { id } = req.params;
     const campground = await Campground.findByIdAndUpdate(id, {...req.body.campground});
     req.flash('success', 'キャンプ場を更新しました');
     res.redirect(`/campgrounds/${campground._id}`);
 }));
 
-router.delete('/:id', catchAsync(async (req, res) => {
+router.delete('/:id', isLoggedIn, catchAsync(async (req, res) => {
     const { id } = req.params;
     await Campground.findByIdAndDelete(id);
     req.flash('success', 'キャンプ場を削除しました');

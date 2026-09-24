@@ -28,6 +28,20 @@ npm i method-override
 // node seeds/index.js
 nodemon app.js
 
+
+
+★macでのmongo起動方法
+・dockerでmyDeployment起動
+・mongosh
+
+★ubuntu
+install
+https://www.mongodb.com/try/download/community
+#起動
+sudo systemctl start mongod
+mongosh
+
+
 ■mongo
 mongosh
 show dbs

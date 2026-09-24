@@ -80,6 +80,7 @@ app.use((req, res, next) => {
   //保存した値はテンプレートから自動的に使えるようになるのでどのテンプレートからでもsuccessを使えるようになる
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
+  res.locals.currentUser = req.user;
   next();
 });
 
