@@ -17,8 +17,10 @@ finish-488まで
 finish-507まで
 
 バージョン6 認証(Passport使って。ちなみにPassportのハッシュ関数はpbkdf2)
-finish-まで
+finish-520まで
 
+バージョン7 
+finish-まで
 
 ■初期
 npm i express mongoose@5 ejs

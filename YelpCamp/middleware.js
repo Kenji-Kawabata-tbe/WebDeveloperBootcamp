@@ -6,6 +6,9 @@ module.exports.isLoggedIn = (req, res, next) => {
 
     //isAuthenticatedメソッドでログイン済かどうかを判定できる
     if (!req.isAuthenticated()) {
+        //console.log(req.path, req.originalUrl);
+        // ログインした時に元々いたページに戻るようにする
+        req.session.returnTo = req.originalUrl;
         req.flash('error', 'ログインしてください');
         return res.redirect('/login');
     }

@@ -76,6 +76,7 @@ passport.deserializeUser(User.deserializeUser());
 //フラッシュのミドルウェアを作ってどこからでも呼び出せるようにする
 app.use(flash());
 app.use((req, res, next) => {
+  console.log(req.session);
   //res.localsであるリクエストのライフサイクル内(一回のリクエスト内)で使える変数を一時的に保存できる
   //保存した値はテンプレートから自動的に使えるようになるのでどのテンプレートからでもsuccessを使えるようになる
   res.locals.success = req.flash('success');

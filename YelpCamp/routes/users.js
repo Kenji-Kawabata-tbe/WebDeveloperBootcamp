@@ -7,14 +7,18 @@ router.get('/register', (req, res) => {
     res.render('users/register');
 });
 
-router.post('/register', async (req, res) => {
+router.post('/register', async (req, res, next) => {
     try {
         const { email, username, password } = req.body;
         const user = new User({ email, username });
         const registerUser = await User.register(user, password);
         console.log(registerUser);
-        req.flash('success', 'Yelp Campへようこそ！');
-        res.redirect('/campgrounds');
+        // passportのlogoutメソッドでユーザ登録と同時にログインも行う
+        req.login(registerUser, err => {
+            if (err) return next(err);
+            req.flash('success', 'Yelp Campへようこそ！');
+            res.redirect('/campgrounds');
+        })
     } catch (e) {
         req.flash('error', e.message);
         res.redirect('/register');
@@ -25,12 +29,18 @@ router.get('/login', (req, res) => {
     res.render('users/login');
 });
 
-// passportを使ってログイン
+// passportのauthenticateメソッドを使ってログイン
 // リクエストボディに入っているusernameとpasswordを見てかつpasswordをハッシュ化して
 // データベースのものと一致するかを裏で全部やっている
 router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login'} ) , (req, res) => {
     req.flash('success', 'おかえりなさい！！');
-    res.redirect('/campgrounds');
+    // セッションの中のreturnToｈがあれぼそこにリダイレクトし、なければ/campgroundsにリダイレクト
+    // req.session.returnToはmiddleware.jsで定義している
+    const redirectUrl = req.session.returnTo || '/campgrounds';
+    // returnToは消さないと残り続けるので、使い終わったら削除する
+    delete req.session.returnTo;
+    res.redirect(redirectUrl);
+    //res.redirect('/campgrounds');
 });
 
 router.get('/logout', (req, res) => {
