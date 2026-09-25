@@ -19,15 +19,16 @@ finish-507まで
 バージョン6 認証(Passport使って。ちなみにPassportのハッシュ関数はpbkdf2)
 finish-520まで
 
-バージョン7 
+バージョン7 キャンプ場に登録者の追加、その認可
 finish-まで
 
 ■初期
 npm i express mongoose@5 ejs
 npm i method-override
 ■node
-// 初期データでデータリセット
-// node seeds/index.js
+//初期データでデータリセット
+node seeds/index.js
+■起動
 nodemon app.js
 
 

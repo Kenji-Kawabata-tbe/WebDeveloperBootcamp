@@ -21,6 +21,8 @@ const seedDB = async () => {
         const randomCityIndex = Math.floor(Math.random() * cities.length);
         const price = Math.floor(Math.random() * 2000) + 1000;
         const camp = new Campground({
+            //mongoのyelp-camp -> db.users.find({username: 'sato'})の_id macとwindowsで違うはず
+            author: '6ab4f8ad0e4e873a693bbc05',
             location: `${cities[randomCityIndex].prefecture}${cities[randomCityIndex].city}`,
             title: `${sample(descriptors)}・${sample(places)}`,
             image: `https://picsum.photos/400?random=${Math.random()}`,
