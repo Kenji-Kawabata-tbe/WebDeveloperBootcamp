@@ -1,53 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-const User = require('../models/user');
+const users = require('../controllers/users');
 
-router.get('/register', (req, res) => {
-    res.render('users/register');
-});
+router.get('/register', users.renderRegister);
 
-router.post('/register', async (req, res, next) => {
-    try {
-        const { email, username, password } = req.body;
-        const user = new User({ email, username });
-        const registerUser = await User.register(user, password);
-        console.log(registerUser);
-        // passportのlogoutメソッドでユーザ登録と同時にログインも行う
-        req.login(registerUser, err => {
-            if (err) return next(err);
-            req.flash('success', 'Yelp Campへようこそ！');
-            res.redirect('/campgrounds');
-        })
-    } catch (e) {
-        req.flash('error', e.message);
-        res.redirect('/register');
-    }
-});
+router.post('/register', users.register);
 
-router.get('/login', (req, res) => {
-    res.render('users/login');
-});
+router.get('/login', users.renderLogin);
 
 // passportのauthenticateメソッドを使ってログイン
 // リクエストボディに入っているusernameとpasswordを見てかつpasswordをハッシュ化して
 // データベースのものと一致するかを裏で全部やっている
-router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login'} ) , (req, res) => {
-    req.flash('success', 'おかえりなさい！！');
-    // セッションの中のreturnToｈがあれぼそこにリダイレクトし、なければ/campgroundsにリダイレクト
-    // req.session.returnToはmiddleware.jsで定義している
-    const redirectUrl = req.session.returnTo || '/campgrounds';
-    // returnToは消さないと残り続けるので、使い終わったら削除する
-    delete req.session.returnTo;
-    res.redirect(redirectUrl);
-    //res.redirect('/campgrounds');
-});
+router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login'} ) , users.login );
 
-router.get('/logout', (req, res) => {
-    // passportのlogoutメソッドでログアウト
-    req.logout();
-    req.flash('success', 'ログアウトしました');
-    res.redirect('/campgrounds');
-});
+router.get('/logout', users.logout);
 
 module.exports = router;
