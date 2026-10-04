@@ -34,8 +34,10 @@ module.exports.createCampground = async (req, res) => {
     //}
     const campground = new Campground(req.body.campground);
     //現在のユーザをauthorに設定
+    campground.images = req.files.map(f => ({ url: f.path, filename: f.filename }));
     campground.author = req.user._id;
     await campground.save();
+    console,log(campground);
     req.flash('success', '新しいキャンプ場を登録しました')
 
     res.redirect(`/campgrounds/${campground._id}`);
