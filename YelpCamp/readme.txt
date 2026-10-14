@@ -29,9 +29,14 @@ finish-531まで
 バージョン9 画像アップロード
 finish-546まで
 
-バージョン
-finish-まで
+バージョン10 地図、クラスターマップ(微妙)
+finish-561まで
 
+バージョン11 スタイルの仕上げ
+finish-567まで
+
+バージョン1
+finish-まで
 
 ■初期
 npm i express mongoose@5 ejs
