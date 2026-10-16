@@ -22,6 +22,9 @@ const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
 //const cookie = require('express-session/session/cookie');
 
+// SQLインジェクション対策用のミドルウェア
+const mongoSanitize = require('express-mongo-sanitize');
+
 mongoose
   .connect("mongodb://localhost:27017/yelp-camp",
     {
@@ -52,6 +55,10 @@ app.use(methodOverride('_method'));
 //静的ファイルの読み込み
 app.use(express.static(path.join(__dirname, 'public')));
 
+//!!SQLインジェクション対策のモジュール。ただしexpress4系互換っぽいので有効化するとこのアプリではエラーになる
+//app.use(mongoSanitize());
+
+
 //セッション関連の設定
 const sessionConfig = {
   secret: 'mysecret',
@@ -80,7 +87,9 @@ passport.deserializeUser(User.deserializeUser());
 //フラッシュのミドルウェアを作ってどこからでも呼び出せるようにする
 app.use(flash());
 app.use((req, res, next) => {
-  console.log(req.session);
+  // sqlインジェクションの確認用。何もしないと
+  // http://localhost:3000/campgrounds?&gt=sasadasaで{ gt: 'sasadasa' }が取れてしまう
+  console.log(req.query);
   //res.localsであるリクエストのライフサイクル内(一回のリクエスト内)で使える変数を一時的に保存できる
   //保存した値はテンプレートから自動的に使えるようになるのでどのテンプレートからでもsuccessを使えるようになる
   res.locals.success = req.flash('success');
