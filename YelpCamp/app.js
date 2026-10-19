@@ -1,3 +1,6 @@
+// 本番モードじゃない時
+// error.ejsでも同様に本番モードの時だけエラーになるように
+// 本番モードで試したかったら NODE_ENV=production node app.js で起動
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
@@ -55,12 +58,14 @@ app.use(methodOverride('_method'));
 //静的ファイルの読み込み
 app.use(express.static(path.join(__dirname, 'public')));
 
-//!!SQLインジェクション対策のモジュール。ただしexpress4系互換っぽいので有効化するとこのアプリではエラーになる
+//!!SQLインジェクション対策のモジュール。
+// ただしexpress4系互換っぽいので有効化するとこのアプリではエラーになる
 //app.use(mongoSanitize());
 
 
 //セッション関連の設定
 const sessionConfig = {
+  name: 'fehuaofey',
   secret: 'mysecret',
   resave: false,
   saveUninitialized: true,
@@ -68,6 +73,9 @@ const sessionConfig = {
     // javascriptからクッキーの値を見れないようにする。セキュリティ面で重要。
     // デフォルトでもtrueだが分かりやすく明示的に設定している
     httpOnly: true,
+    // httpsだけ許可する設定。
+    // ただ、このアプリだと動かないのでコメントアウトしている
+    //secure: true,
     // セッションの有効期限
     maxAge: 1000 * 60 * 60 * 24 * 7
   }

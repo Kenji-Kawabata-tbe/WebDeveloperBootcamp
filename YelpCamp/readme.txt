@@ -35,6 +35,14 @@ finish-561まで
 バージョン11 スタイルの仕上げ
 finish-567まで
 
+バージョン12 よくあるセキュリティ対策
+finish-まで
+・SQLインジェクション
+・XSS
+・app.jsのconst sessionConfig = {のcookieの設定
+・app.jsとerror.ejsのif (process.env.NODE_ENV !== 'production') { で本番じゃない時だけ.dotenv使ったりエラーの詳細出したり
+・CSP
+
 バージョン1
 finish-まで
 
