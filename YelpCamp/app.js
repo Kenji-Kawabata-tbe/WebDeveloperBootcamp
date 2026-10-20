@@ -17,7 +17,9 @@ const ExpressError = require('./utils/ExpressError')
 const methodOverride = require("method-override");
 const passport = require('passport');
 const localStrategy = require('passport-local');
-const User = require('./models/user')
+const User = require('./models/user');
+// helmet セキュリティに関連したhttpヘッダーを設定してくれるミドルウェア
+const helmet = require('helmet');
 
 // routeの読み込み
 const userRoutes = require('./routes/users');
@@ -94,6 +96,48 @@ passport.deserializeUser(User.deserializeUser());
 //フラッシュ関連の設定
 //フラッシュのミドルウェアを作ってどこからでも呼び出せるようにする
 app.use(flash());
+
+//これでhelmetの15個あるうちの11個が有効化される。v4の場合。
+app.use(helmet());
+//ミドルウェア毎に有効、無効を切り替えられる
+const scriptSrcUrls = [
+    'https://api.mapbox.com',
+    'https://cdn.jsdelivr.net'
+];
+const styleSrcUrls = [
+    'https://api.mapbox.com',
+    'https://cdn.jsdelivr.net'
+];
+const connectSrcUrls = [
+    'https://api.mapbox.com',
+    'https://*.tiles.mapbox.com',
+    'https://events.mapbox.com'
+];
+const fontSrcUrls = [];
+const imgSrcUrls = [
+    `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/`,
+    'https://images.unsplash.com'
+];
+
+//CSP(ContentSecurityPoicy)はXSSを防ぐのを助けてくれる仕組みの一つ。
+//画像はunsplashとかcloudinaryからしか取得しない、javascriptは特定のcdnからのものしか許可しない、フォントはgoogleフォントしか許可しないなど
+//いろんなコンテンツをどこから取得するのを許可するかということを制御できる。英語の名前そのまま
+app.use(helmet.contentSecurityPolicy({
+    directives: {
+        defaultSrc: [],
+        connectSrc: ["'self'", ...connectSrcUrls],
+        scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+        styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+        workerSrc: ["'self'", "blob:"],
+        childSrc: ["blob:"],
+        objectSrc: [],
+        imgSrc: ["'self'", 'blob:', 'data:', ...imgSrcUrls],
+        fontSrc: ["'self'", ...fontSrcUrls]
+    }
+}));
+
+
+
 app.use((req, res, next) => {
   // sqlインジェクションの確認用。何もしないと
   // http://localhost:3000/campgrounds?&gt=sasadasaで{ gt: 'sasadasa' }が取れてしまう

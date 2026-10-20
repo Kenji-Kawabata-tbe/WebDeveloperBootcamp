@@ -31,17 +31,18 @@ finish-546まで
 
 バージョン10 地図、クラスターマップ(微妙)
 finish-561まで
+たぶん、CSPで防がれてる。開発者ツールのConsoleから確認できる。
 
 バージョン11 スタイルの仕上げ
 finish-567まで
 
 バージョン12 よくあるセキュリティ対策
-finish-まで
-・SQLインジェクション
-・XSS
-・app.jsのconst sessionConfig = {のcookieの設定
-・app.jsとerror.ejsのif (process.env.NODE_ENV !== 'production') { で本番じゃない時だけ.dotenv使ったりエラーの詳細出したり
-・CSP
+finish-575まで
+・568 SQLインジェクション app.js mongoSanitize
+・569,570 XSS sheams.js sanitize-html
+・571 cookieの設定 app.jsのconst sessionConfig = {のcookieの設定
+・572 本番じゃない時だけ.dotenv使ったりエラーの詳細出したり app.jsとerror.ejsのif (process.env.NODE_ENV !== 'production') {
+・574,575 HTTPヘッダー/CSP app.js helmet
 
 バージョン1
 finish-まで
