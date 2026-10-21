@@ -30,8 +30,13 @@ const reviewRoutes = require('./routes/reviews');
 // SQLインジェクション対策用のミドルウェア
 const mongoSanitize = require('express-mongo-sanitize');
 
-mongoose
-  .connect("mongodb://localhost:27017/yelp-camp",
+//const dbUrl = process.env.DB_URL;
+const dbUrl = "mongodb://localhost:27017/yelp-camp"
+
+const MongoStore = require('connect-mongo');
+
+//mongoose.connect("mongodb://localhost:27017/yelp-camp",
+mongoose.connect(dbUrl,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -65,8 +70,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 //app.use(mongoSanitize());
 
 
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    crypto: {
+        secret: 'mysecret'
+    },
+    touchAfter: 24 * 3600 // セッションが変わらない場合に保存しない期間 3600秒 * 24
+});
+
+store.on('error', e => {
+  console.log('セッションストアエラー', e);
+});
+
 //セッション関連の設定
 const sessionConfig = {
+  store,
   name: 'fehuaofey',
   secret: 'mysecret',
   resave: false,

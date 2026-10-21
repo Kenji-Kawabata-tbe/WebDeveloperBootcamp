@@ -44,8 +44,9 @@ finish-575まで
 ・572 本番じゃない時だけ.dotenv使ったりエラーの詳細出したり app.jsとerror.ejsのif (process.env.NODE_ENV !== 'production') {
 ・574,575 HTTPヘッダー/CSP app.js helmet
 
-バージョン1
-finish-まで
+バージョン13
+finish-578まで
+やったけどconnect-mongoの情報が古いかなにかで動かない
 
 
 ■初期
