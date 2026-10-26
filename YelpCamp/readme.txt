@@ -47,7 +47,7 @@ finish-575まで
 バージョン13
 finish-578まで
 やったけどconnect-mongoの情報が古いかなにかで動かない
-
+579からのherokuはやってない
 
 ■初期
 npm i express mongoose@5 ejs
