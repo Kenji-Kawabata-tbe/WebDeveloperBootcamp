@@ -11,9 +11,18 @@
 ・JavaScriptの構文拡張
 ・HTMLのようなマークアップをJavaScriptの中に直接書くことが出来る
 ・ただしJSXはそのままでは「正式な」JavaScriptではないためトランスパイル(変換)が必要
-・トランスパイルにはbabelが必要
+・トランスパイルには専用のパッケージがが必要。codesandboxだとbabelで、viteでローカル環境作った場合だとesbuild。
 ・JSXのルール
   <br/>や<input/>のような自己終了タグは明示的に閉じる必要がある
   コンポーネントは単一のトップレベル要素しか返せない
   return <input type="password" /><input type="password" />
   みたいなことはできない
+
+■Vite(ヴィート)
+・ローカルでReactで動かすツール。React以外にも対応。
+・同じようなツールでCreateReactAppがある。これはReact専用だけど、最近はあんま使われていない。
+・Viteは小～中規模のReactアプリによく使われる？ProductionレベルだとNext.jsとかRemix？
+・npm create vite@6.2.0
+  npm install
+  // ローカルの開発環境起動
+  npm run dev
