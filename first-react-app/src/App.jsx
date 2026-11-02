@@ -4,6 +4,7 @@ import Greeter from './Greeter'
 import Die from './Die'
 import ListPicker from './ListPicker'
 import DoubleDice from './DoubleDice'
+import Heading from './Heading'
 
 function App() {
 
@@ -25,6 +26,8 @@ function App() {
       <DoubleDice />
       <DoubleDice />
       <DoubleDice />
+      <Heading color='magenta' text="ようこそ!" fontSize="20px"/>
+      <Heading color='tead' text="ほげほげ" fontSize="40px"/>
     </div>
   );
 }
