@@ -5,6 +5,8 @@ import Die from './Die'
 import ListPicker from './ListPicker'
 import DoubleDice from './DoubleDice'
 import Heading from './Heading'
+import ColorList from './ColorList'
+import Slots from './Slots'
 
 function App() {
 
@@ -28,6 +30,11 @@ function App() {
       <DoubleDice />
       <Heading color='magenta' text="ようこそ!" fontSize="20px"/>
       <Heading color='tead' text="ほげほげ" fontSize="40px"/>
+      <ColorList colors={['red', 'pink', 'purple', 'teal']} />
+      <ColorList colors={['olive', 'orangered', 'grey']} />
+
+      <Slots val1="🍒" val2="d" val3="🍒" />
+      {/* <Slots val1="🍒" val2="🍌" val3="🍒" /> */}
     </div>
   );
 }
