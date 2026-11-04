@@ -7,11 +7,21 @@ import DoubleDice from './DoubleDice'
 import Heading from './Heading'
 import ColorList from './ColorList'
 import Slots from './Slots'
+import ShoppingList from './ShoppingList'
+
+const data = [
+  {id: 1, item: '卵', quantity: 12, completed: false},
+  {id: 2, item: '牛乳', quantity: 1, completed: true},
+  {id: 3, item: '鶏むね肉', quantity: 4, completed: false},
+  {id: 4, item: 'にんじん', quantity: 6, completed: true},
+]
+
 
 function App() {
 
   return (
     <div>
+      <ShoppingList items={data} />
       <Chicken />
       <Chicken />
       <Chicken />
