@@ -10,6 +10,7 @@ import Slots from './Slots'
 import ShoppingList from './ShoppingList'
 import Clicker from './Clicker'
 import Form from './Form'
+import Counter from './Counter'
 
 const data = [
   {id: 1, item: '卵', quantity: 12, completed: false},
@@ -23,6 +24,7 @@ function App() {
 
   return (
     <div>
+      <Counter />
       <Form />
       <Clicker />
       <ShoppingList items={data} />
