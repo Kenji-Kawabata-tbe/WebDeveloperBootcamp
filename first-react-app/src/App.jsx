@@ -11,6 +11,8 @@ import ShoppingList from './ShoppingList'
 import Clicker from './Clicker'
 import Form from './Form'
 import Counter from './Counter'
+import Toggler from './Toggler'
+import TogglerCounter from './TogglerCounter'
 
 const data = [
   {id: 1, item: '卵', quantity: 12, completed: false},
@@ -24,6 +26,8 @@ function App() {
 
   return (
     <div>
+      <TogglerCounter />
+      <Toggler />
       <Counter />
       <Form />
       <Clicker />
