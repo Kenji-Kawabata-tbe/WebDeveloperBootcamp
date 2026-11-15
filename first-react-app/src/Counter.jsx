@@ -19,7 +19,7 @@ export default function Counter() {
   //   この場合
   //   num stateの値そのもの
   //   setNum stateを変更する関数
-  //   初期値は5
+  //   初期値は5。一回目しか使われず、それ以降は更新された状態でReactが実行してくれる。
   // useStateはコンポーネントの内部で呼び出す必要がある
   const [num, setNum] = useState(5);
 
@@ -28,6 +28,9 @@ export default function Counter() {
     // setNum(10);
     // numを1ずつ増やす
     setNum(num + 1);
+    // これは初回は5のまま。再描画や再実行された時に新しいstateが反映されるので
+    // 以降もstateに反映される前の値が出力される
+    console.log(`num: ${num}`);
   };
 
   return (

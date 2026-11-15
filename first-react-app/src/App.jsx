@@ -13,6 +13,8 @@ import Form from './Form'
 import Counter from './Counter'
 import Toggler from './Toggler'
 import TogglerCounter from './TogglerCounter'
+import ColorBox from './ColorBox'
+import ColorBoxGrid from './ColorBoxGrid'
 
 const data = [
   {id: 1, item: '卵', quantity: 12, completed: false},
@@ -21,11 +23,19 @@ const data = [
   {id: 4, item: 'にんじん', quantity: 6, completed: true},
 ]
 
+const colors = [
+  '#E91E63',
+  '#9C27B0',
+  '#673AB7',
+  '#00BCD4',
+]
 
 function App() {
 
   return (
     <div>
+      <ColorBoxGrid colors={colors} />
+      <ColorBox colors={colors} />
       <TogglerCounter />
       <Toggler />
       <Counter />
