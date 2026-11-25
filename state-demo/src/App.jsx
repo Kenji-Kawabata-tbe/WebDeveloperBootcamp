@@ -5,7 +5,6 @@ import ScoreKeeper from './ScoreKeeper'
 import EmojiClicker from './EmojiClicker'
 
 function App() {
-
   return (
     <div>
       <EmojiClicker />
