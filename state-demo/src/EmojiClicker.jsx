@@ -26,6 +26,14 @@ export default function EmojiClicker() {
         });
     };
 
+    const makeEverythingHeart = () => {
+        setEmojis((previousEmojis) => {
+            return previousEmojis.map((e) => {
+                return { ...e, emoji: '❤' };
+            });
+        });
+    };
+
     return (
         <div>
             {emojis.map((e) => (
@@ -35,6 +43,7 @@ export default function EmojiClicker() {
                 </span>
             ))}
             <button onClick={addEmoji}>絵文字を追加</button>
+            <button onClick={makeEverythingHeart}>すべてハートにする</button>
         </div>
     );
 }
