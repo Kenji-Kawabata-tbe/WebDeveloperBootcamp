@@ -40,3 +40,4 @@ React 584
 first-react-app,clicker-exercise,property-exercise 599
 state-demo 628
 score-keeper-exercise 629
+component-design-dice-game/component-design-dice-game-starter 638
